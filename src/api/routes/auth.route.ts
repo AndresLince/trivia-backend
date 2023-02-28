@@ -21,6 +21,6 @@ export class AuthRoute {
             check('username', 'El nombre de usuario es obligatorio').not().isEmpty(),
             this.httpUtilsHandler.validateFields
         ], this.authHandler.signUp);
-        return router
+        return router;
     }
 }

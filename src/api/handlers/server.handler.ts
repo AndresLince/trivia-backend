@@ -1,8 +1,8 @@
 import express, { Express } from 'express';
-import {AuthRoute} from '../routes/auth.route';
-const cors = require('cors')
+import { AuthRoute } from '../routes/auth.route';
+import cors from 'cors';
 
-export class ServerHandler{
+export class ServerHandler {
     private authRoutes: AuthRoute;
     constructor() {
         this.authRoutes = new AuthRoute();
@@ -12,7 +12,7 @@ export class ServerHandler{
         app.use(cors());
         app.use(express.json());
 
-        app.use('/api/auth', this.authRoutes.createRoutes())
+        app.use('/api/auth', this.authRoutes.createRoutes());
 
         return app;
     }
