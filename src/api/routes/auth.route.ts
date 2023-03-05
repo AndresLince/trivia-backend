@@ -1,5 +1,6 @@
 import { AuthHandler } from "../handlers/auth.handler";
 import { HttpUtilsHandler } from "../handlers/httpUtilsHandler";
+import { UserRepositoryMysql } from "../repositories/user.repository.mysql"
 
 /*
 Route: /api/auth
@@ -7,13 +8,16 @@ Route: /api/auth
 import { Router } from 'express';
 const router = Router();
 import { check } from 'express-validator';
+import { AuthRouteConstructorInterface } from "../interfaces/auth.route.interface";
 
 export class AuthRoute {
     private authHandler: AuthHandler;
     private httpUtilsHandler: HttpUtilsHandler;
-    constructor() {
-        this.authHandler = new AuthHandler();
+    constructor({ userRepository }: AuthRouteConstructorInterface) {
         this.httpUtilsHandler = new HttpUtilsHandler();
+        this.authHandler = new AuthHandler({
+            userRepository: userRepository
+        });
     }
 
     createRoutes(): Router {
