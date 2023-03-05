@@ -4,8 +4,8 @@ import cors from 'cors';
 
 export class ServerHandler {
     private authRoutes: AuthRoute;
-    constructor() {
-        this.authRoutes = new AuthRoute();
+    constructor({ userRepository }: any) {
+        this.authRoutes = new AuthRoute(userRepository);
     }
     createServer(): Express {
         const app: Express = express();
