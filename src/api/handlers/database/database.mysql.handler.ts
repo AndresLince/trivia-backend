@@ -1,16 +1,16 @@
 import { createPool, Pool } from 'mysql';
+import { DatabaseMysqlHandlerConstructorInterface } from '../../interfaces/database.mysql.handler.interface';
 const util = require('util');
-// Set database connection credentials
-const config = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-};
+
 export class DatabaseMysqlHandler {
     private pool: Pool;
-    constructor() {
-        console.log("config:", config);
+    constructor({ configService }: DatabaseMysqlHandlerConstructorInterface) {
+        const config = {
+            host: configService.getConfig('DB_HOST'),
+            user: configService.getConfig('DB_USER'),
+            password: configService.getConfig('DB_PASSWORD'),
+            database: configService.getConfig('DB_DATABASE'),
+        };
         this.pool = createPool(config);
 
         this.pool.getConnection((err, connection) => {
