@@ -1,5 +1,5 @@
-import { UserRepositoryInterface } from "./user.repository.interface";
+import { AuthHandlerInterface } from "./auth.handler.interface";
 
 export interface AuthRouteConstructorInterface {
-    userRepository: UserRepositoryInterface;
+    authHandler: AuthHandlerInterface;
 }
