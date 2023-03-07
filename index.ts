@@ -1,3 +1,4 @@
+import { AuthHandler } from './src/api/handlers/auth.handler';
 import { DatabaseMysqlHandler } from './src/api/handlers/database/database.mysql.handler';
 import { ServerHandler } from './src/api/handlers/server.handler';
 import { UserRepositoryMysql } from './src/api/repositories/user.repository.mysql';
@@ -9,10 +10,11 @@ const databaseHandler = new DatabaseMysqlHandler({
 const userRepository = new UserRepositoryMysql({
     databaseMysqlHandler: databaseHandler,
 });
+let authHandler = new AuthHandler({
+    userRepository: userRepository
+});
 const serverHandler = new ServerHandler({
-    configService,
-    databaseHandler,
-    userRepository
+    authHandler
 });
 const app = serverHandler.createServer();
 
