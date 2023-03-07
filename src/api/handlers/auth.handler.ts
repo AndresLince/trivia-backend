@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { AuthHandlerConstructorInterface } from '../interfaces/auth.handler.interface';
+import { AuthHandlerConstructorInterface, AuthHandlerInterface } from '../interfaces/auth.handler.interface';
 import { CreateUserModel } from '../interfaces/createUser.model';
 import { UserRepositoryInterface } from '../interfaces/user.repository.interface';
 
-export class AuthHandler {
+export class AuthHandler implements AuthHandlerInterface {
     private userRepository: UserRepositoryInterface;
     constructor({ userRepository }: AuthHandlerConstructorInterface) {
         this.userRepository = userRepository
