@@ -9,22 +9,21 @@ import { Router } from 'express';
 const router = Router();
 import { check } from 'express-validator';
 import { AuthRouteConstructorInterface } from "../interfaces/auth.route.interface";
+import { AuthHandlerInterface } from "../interfaces/auth.handler.interface";
 
 export class AuthRoute {
-    private authHandler: AuthHandler;
+    private authHandler: AuthHandlerInterface;
     private httpUtilsHandler: HttpUtilsHandler;
-    constructor({ userRepository }: AuthRouteConstructorInterface) {
+    constructor({ authHandler }: AuthRouteConstructorInterface) {
         this.httpUtilsHandler = new HttpUtilsHandler();
-        this.authHandler = new AuthHandler({
-            userRepository: userRepository
-        });
+        this.authHandler = authHandler;
     }
 
     createRoutes(): Router {
         router.post('/signup', [
             check('username', 'El nombre de usuario es obligatorio').not().isEmpty(),
             this.httpUtilsHandler.validateFields
-        ], this.authHandler.signUp);
+        ], this.authHandler.signUp );
         return router;
     }
 }
