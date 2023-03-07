@@ -1,9 +1,9 @@
-import { DatabaseMysqlHandler } from '../handlers/database/database.mysql.handler';
 import { CreateUserModel } from '../interfaces/createUser.model';
+import { DatabaseHandlerInterface } from '../interfaces/database.handler';
 import { UserRepositoryConstructorInterface, UserRepositoryInterface } from '../interfaces/user.repository.interface';
 
 export class UserRepositoryMysql implements UserRepositoryInterface {
-    private databaseHandler: DatabaseMysqlHandler
+    private databaseHandler: DatabaseHandlerInterface
     constructor({ databaseMysqlHandler }: UserRepositoryConstructorInterface) {
         this.databaseHandler = databaseMysqlHandler
     }
