@@ -1,8 +1,9 @@
 import { createPool, Pool } from 'mysql';
+import { DatabaseHandlerInterface } from '../../interfaces/database.handler';
 import { DatabaseMysqlHandlerConstructorInterface } from '../../interfaces/database.mysql.handler.interface';
 const util = require('util');
 
-export class DatabaseMysqlHandler {
+export class DatabaseMysqlHandler implements DatabaseHandlerInterface {
     private pool: Pool;
     constructor({ configService }: DatabaseMysqlHandlerConstructorInterface) {
         const config = {
