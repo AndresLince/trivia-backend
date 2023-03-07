@@ -17,27 +17,27 @@ export class DatabaseMysqlHandler implements DatabaseHandlerInterface {
         this.pool.getConnection((err, connection) => {
             if (err) {
                 if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-                    console.error('Database connection was closed.')
+                    console.error('Database connection was closed.');
                 }
                 if (err.code === 'ER_CON_COUNT_ERROR') {
-                    console.error('Database has too many connections.')
+                    console.error('Database has too many connections.');
                 }
                 if (err.code === 'ECONNREFUSED') {
-                    console.error('Database connection was refused levanta el xamp.')
+                    console.error('Database connection was refused levanta el xamp.');
                 }
             } else {
-                console.log('Mysql database connected')
+                console.log('Mysql database connected');
             }
 
-            if (connection) connection.release()
+            if (connection) connection.release();
 
-            return
-        })
+            return;
+        });
 
         this.pool.query = util.promisify(this.pool.query);
     }
 
     getPool(): Pool {
-        return this.pool
+        return this.pool;
     }
 }

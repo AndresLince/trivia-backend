@@ -5,6 +5,6 @@ export class ConfigService {
         dotenv.config();
     }
     getConfig(key: string): any {
-        return process.env[key];
+        return process.env[ key ];
     }
 }
