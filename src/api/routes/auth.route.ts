@@ -22,6 +22,7 @@ export class AuthRoute {
     createRoutes(): Router {
         router.post('/signup', [
             check('username', 'El nombre de usuario es obligatorio').not().isEmpty(),
+            check('ip', 'la ip del usuario es obligatoria').not().isEmpty(),
             this.httpUtilsHandler.validateFields
         ], this.authHandler.signUp );
         return router;
