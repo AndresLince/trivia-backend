@@ -9,14 +9,23 @@ export class AuthHandler implements AuthHandlerInterface {
         this.userRepository = userRepository;
         this.signUp = this.signUp.bind(this);
     }
-    signUp(request: Request, response: Response): void {
+    async signUp(request: Request, response: Response): Promise<any> {
+        const { username, ip } = request.body;
         const userModel: CreateUserModel = {
-            username: "username",
-            ip: "ip",
+            username: username,
+            ip: ip,
         };
-        const createdUser = this.userRepository.createUser(userModel);
-        response.status(200).send({
-            message: "Usuario logueado correctamente"
-        });
+        try {
+            const createdUser = await this.userRepository.createUser(userModel);
+            response.status(200).send({
+                message: "Usuario logueado correctamente",
+                id: createdUser.id
+            });
+        } catch (error) {
+            console.log(error);
+            return response.status(500).send({
+                message: "Error interno por favor intenta nuevamente",
+            });
+        }
     }
 }
