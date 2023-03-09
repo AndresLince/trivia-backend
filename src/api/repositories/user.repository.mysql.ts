@@ -10,10 +10,10 @@ export class UserRepositoryMysql implements UserRepositoryInterface {
     }
     async createUser({ username, ip }: CreateUserModel): Promise<InsertModel> {
         const sql = `call createUser(?,?, @last_id)`;
-        await this.databaseHandler.getPool().query(sql, [username, ip]);
+        await this.databaseHandler.getPool().query(sql, [ username, ip ]);
 
         const sql2 = `SELECT @last_id AS insertId`;
         const result = await this.databaseHandler.getPool().query(sql2);
-        return result[0];
+        return result[ 0 ];
     }
 }

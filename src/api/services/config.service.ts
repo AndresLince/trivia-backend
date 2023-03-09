@@ -4,7 +4,7 @@ export class ConfigService {
     constructor() {
         dotenv.config();
     }
-    getConfig(key: string): any {
-        return process.env[ key ];
+    getConfig(key: string): number | string {
+        return process.env[ key ] || '';
     }
 }

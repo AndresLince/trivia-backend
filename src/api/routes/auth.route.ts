@@ -1,6 +1,4 @@
-import { AuthHandler } from "../handlers/auth.handler";
 import { HttpUtilsHandler } from "../handlers/httpUtilsHandler";
-import { UserRepositoryMysql } from "../repositories/user.repository.mysql";
 
 /*
 Route: /api/auth
