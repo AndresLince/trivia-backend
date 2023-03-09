@@ -16,10 +16,11 @@ export class AuthHandler implements AuthHandlerInterface {
             ip: ip,
         };
         try {
-            const createdUser = await this.userRepository.createUser(userModel);
-            response.status(200).send({
+            const { insertId } = await this.userRepository.createUser(userModel);
+
+            return response.status(200).send({
                 message: "Usuario logueado correctamente",
-                id: createdUser.id
+                id: insertId
             });
         } catch (error) {
             console.log(error);
