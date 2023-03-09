@@ -1,4 +1,5 @@
 import { CreateUserModel } from '../interfaces/createUser.model';
+import { InsertModel } from '../interfaces/crud.responses.interface';
 import { DatabaseHandlerInterface } from '../interfaces/database.handler';
 import { UserRepositoryConstructorInterface, UserRepositoryInterface } from '../interfaces/user.repository.interface';
 
@@ -7,19 +8,12 @@ export class UserRepositoryMysql implements UserRepositoryInterface {
     constructor({ databaseMysqlHandler }: UserRepositoryConstructorInterface) {
         this.databaseHandler = databaseMysqlHandler;
     }
-    async createUser({ username, ip}: CreateUserModel) {
+    async createUser({ username, ip }: CreateUserModel): Promise<InsertModel> {
         const sql = `call createUser(?,?, @last_id)`;
-        //const algo = this.databaseHandler.getPool().query(sql, username, ip);
-        const insertError = {error: false}
-        this.databaseHandler.getPool().query(sql, [username, ip], (error: Error, results: any, fields: any) => {
-            if (error) {
-                console.log("error",error)
-                insertError.error = true;
-            }
-        });
+        await this.databaseHandler.getPool().query(sql, [username, ip]);
 
-        console.log("pasa", insertError);
         const sql2 = `SELECT @last_id AS insertId`;
-        return this.databaseHandler.getPool().query(sql2);
+        const result = await this.databaseHandler.getPool().query(sql2);
+        return result[0];
     }
 }
