@@ -16,10 +16,23 @@ export class AuthHandler implements AuthHandlerInterface {
             ip: ip,
         };
         try {
+            const user = await this.userRepository.searchUserByName(userModel);
+            if (user && user.ip !== userModel.ip) {
+                return response.status(404).send({
+                    message: "Ya existe un usuario con ese nombre",
+                });
+            }
+
+            if (user && user.ip === userModel.ip) {
+                return response.status(200).send({
+                    message: "Usuario creado correctamente",
+                });
+            }
+
             const { insertId } = await this.userRepository.createUser(userModel);
 
             return response.status(200).send({
-                message: "Usuario logueado correctamente",
+                message: "Usuario creado correctamente",
                 id: insertId
             });
         } catch (error) {
