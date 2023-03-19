@@ -5,8 +5,8 @@ import { ServerHandlerConstructorInterface } from '../interfaces/server.handler.
 
 export class ServerHandler {
     private authRoutes: AuthRoute;
-    constructor({ authHandler }: ServerHandlerConstructorInterface) {
-        this.authRoutes = new AuthRoute({ authHandler });
+    constructor({ authHandler, httpUtilsHandler }: ServerHandlerConstructorInterface) {
+        this.authRoutes = new AuthRoute({ authHandler, httpUtilsHandler });
     }
     createServer(): Express {
         const app: Express = express();

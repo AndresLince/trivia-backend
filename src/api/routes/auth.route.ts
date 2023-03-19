@@ -12,8 +12,8 @@ import { AuthHandlerInterface } from "../interfaces/auth.handler.interface";
 export class AuthRoute {
     private authHandler: AuthHandlerInterface;
     private httpUtilsHandler: HttpUtilsHandler;
-    constructor({ authHandler }: AuthRouteConstructorInterface) {
-        this.httpUtilsHandler = new HttpUtilsHandler();
+    constructor({ authHandler, httpUtilsHandler }: AuthRouteConstructorInterface) {
+        this.httpUtilsHandler = httpUtilsHandler
         this.authHandler = authHandler;
     }
 
