@@ -10,9 +10,9 @@ export class AuthHandler implements AuthHandlerInterface {
         this.signUp = this.signUp.bind(this);
     }
     async signUp(request: Request, response: Response): Promise<any> {
-        const { username, ip } = request.body;
+        const { userName, ip } = request.body;
         const userModel: CreateUserModel = {
-            username: username,
+            userName: userName,
             ip: ip,
         };
         try {
@@ -26,6 +26,7 @@ export class AuthHandler implements AuthHandlerInterface {
             if (user && user.ip === userModel.ip) {
                 return response.status(200).send({
                     message: "Usuario creado correctamente",
+                    id: user.idUser
                 });
             }
 

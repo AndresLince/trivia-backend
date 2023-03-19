@@ -8,29 +8,29 @@ export class UserRepositoryMysql implements UserRepositoryInterface {
     constructor({ databaseMysqlHandler }: UserRepositoryConstructorInterface) {
         this.databaseHandler = databaseMysqlHandler;
     }
-    async createUser({ username, ip }: CreateUserModel): Promise<InsertModel> {
+    async createUser({ userName, ip }: CreateUserModel): Promise<InsertModel> {
         const sql = `call createUser(?,?, @last_id)`;
-        await this.databaseHandler.getPool().query(sql, [ username, ip ]);
+        await this.databaseHandler.getPool().query(sql, [ userName, ip ]);
 
         const sql2 = `SELECT @last_id AS insertId`;
         const result = await this.databaseHandler.getPool().query(sql2);
         return result[ 0 ];
     }
-    async searchUserByName({ username }: CreateUserModel): Promise<UserModel | null> {
+    async searchUserByName({ userName }: CreateUserModel): Promise<UserModel | null> {
         const sql = `call searchUserByName(?)`;
-        const result = await this.databaseHandler.getPool().query(sql, [username]);
+        const result = await this.databaseHandler.getPool().query(sql, [userName]);
 
         if (result[0].length === 0) {
             return null;
         }
         let user: UserModel;
 
-        const { idUser, ip, userName, state } = result[0][0];
+        const userDb = result[0][0];
         user = {
-            userName: userName,
-            ip: ip,
-            state: state,
-            idUser: idUser
+            userName: userDb.userName,
+            ip: userDb.ip,
+            state: userDb.state,
+            idUser: userDb.idUser
         };
 
         return user;

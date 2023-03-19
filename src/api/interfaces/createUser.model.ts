@@ -1,4 +1,4 @@
 export interface CreateUserModel {
-    username: string;
+    userName: string;
     ip:string;
 }
