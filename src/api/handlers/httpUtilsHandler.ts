@@ -1,7 +1,10 @@
 import { validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
-import { sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { ConfigService } from '../services/config.service';
+interface JwtPayload {
+    userId: string
+}
 
 export class HttpUtilsHandler {
     private configService: ConfigService;
@@ -24,10 +27,10 @@ export class HttpUtilsHandler {
             message: message,
         });
     }
-    generateJsonWebToken = (modelId: string) => {
+    generateJsonWebToken = (userId: string) => {
         return new Promise((resolve, reject) => {
             const payload = {
-                modelId
+                userId
             };
             sign(payload, this.configService.getConfig('JSON_WEB_TOKEN_SECRET'), {
                 expiresIn: '12h'
@@ -39,5 +42,25 @@ export class HttpUtilsHandler {
                 }
             });
         });
+    };
+    validateJsonWebToken = (req: Request<any>, res: Response, next: NextFunction) => {
+        const token = req.header('x-token');
+        if (!token) {
+            return res.status(401).json({
+                ok: false,
+                message: 'No hay token'
+            });
+        }
+        try {
+            const { userId } = verify(token, this.configService.getConfig('JSON_WEB_TOKEN_SECRET')) as JwtPayload;
+            req.body.uid = userId;
+
+            next();
+        } catch (error) {
+            return res.status(400).json({
+                ok: false,
+                message: 'Token incorrecto'
+            });
+        }
     };
 }
