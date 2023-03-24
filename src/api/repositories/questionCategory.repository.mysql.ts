@@ -4,8 +4,8 @@ import { QuestionCategoryRepositoryInterface, RepositoryConstructorInterface } f
 
 export class QuestionCategoryRepositoryMysql implements QuestionCategoryRepositoryInterface {
     private databaseHandler: DatabaseHandlerInterface;
-    constructor({ databaseHandlerInterface }: RepositoryConstructorInterface) {
-        this.databaseHandler = databaseHandlerInterface;
+    constructor({ databaseHandler }: RepositoryConstructorInterface) {
+        this.databaseHandler = databaseHandler;
     }
     async searchAll(): Promise<UserModel | null> {
         const sql = `call searchQuestionCategories(?)`;
