@@ -5,5 +5,5 @@ export interface QuestionCategoryRepositoryInterface {
 }
 
 export interface RepositoryConstructorInterface {
-    databaseHandlerInterface: DatabaseHandlerInterface;
+    databaseHandler: DatabaseHandlerInterface;
 }
