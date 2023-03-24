@@ -9,7 +9,7 @@ export class ServerHandler {
     private questionCategoryRoute: QuestionCategoryRoute;
     constructor({ authHandler, httpUtilsHandler, questionCategoryHandler }: ServerHandlerConstructorInterface) {
         this.authRoutes = new AuthRoute({ authHandler, httpUtilsHandler });
-        this.questionCategoryRoute = new QuestionCategoryRoute({ questionCategoryHandler })
+        this.questionCategoryRoute = new QuestionCategoryRoute({ questionCategoryHandler, httpUtilsHandler })
     }
     createServer(): Express {
         const app: Express = express();
