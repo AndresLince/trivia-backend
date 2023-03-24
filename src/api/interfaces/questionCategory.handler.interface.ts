@@ -1,9 +1,9 @@
 import { RequestHandler } from "express";
 import { HttpUtilsHandler } from "../handlers/httpUtilsHandler";
-import { UserRepositoryInterface } from "./user.repository.interface";
+import { QuestionCategoryRepositoryInterface } from "./questionCategory.repository.interface";
 
 export interface QuestionCategoryHandlerConstructorInterface {
-    userRepository: UserRepositoryInterface;
+    questionCategoryRepository: QuestionCategoryRepositoryInterface;
     httpUtilsHandler: HttpUtilsHandler
 }
 
