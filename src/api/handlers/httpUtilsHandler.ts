@@ -53,7 +53,7 @@ export class HttpUtilsHandler {
         }
         try {
             const { userId } = verify(token, this.configService.getConfig('JSON_WEB_TOKEN_SECRET')) as JwtPayload;
-            req.body.uid = userId;
+            req.body.userId = userId;
 
             next();
         } catch (error) {
