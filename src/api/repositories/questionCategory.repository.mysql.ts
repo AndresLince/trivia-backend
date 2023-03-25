@@ -15,6 +15,6 @@ export class QuestionCategoryRepositoryMysql implements QuestionCategoryReposito
             return null;
         }
 
-        return result;
+        return result[0];
     }
 }
