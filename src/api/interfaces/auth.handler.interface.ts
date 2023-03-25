@@ -9,4 +9,5 @@ export interface AuthHandlerConstructorInterface {
 
 export interface AuthHandlerInterface {
     signUp: RequestHandler;
+    renewJsonWebToken: RequestHandler
 }

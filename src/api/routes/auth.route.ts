@@ -13,7 +13,7 @@ export class AuthRoute {
     private authHandler: AuthHandlerInterface;
     private httpUtilsHandler: HttpUtilsHandler;
     constructor({ authHandler, httpUtilsHandler }: AuthRouteConstructorInterface) {
-        this.httpUtilsHandler = httpUtilsHandler
+        this.httpUtilsHandler = httpUtilsHandler;
         this.authHandler = authHandler;
     }
 
@@ -23,6 +23,9 @@ export class AuthRoute {
             check('ip', 'la ip del usuario es obligatoria').not().isEmpty(),
             this.httpUtilsHandler.validateFields
         ], this.authHandler.signUp );
+        router.get('/renew', [
+            this.httpUtilsHandler.validateJsonWebToken
+        ], this.authHandler.renewJsonWebToken );
         return router;
     }
 }

@@ -11,6 +11,7 @@ export class AuthHandler implements AuthHandlerInterface {
         this.userRepository = userRepository;
         this.httpUtilsHandler = httpUtilsHandler;
         this.signUp = this.signUp.bind(this);
+        this.renewJsonWebToken = this.renewJsonWebToken.bind(this);
     }
     async signUp(request: Request, response: Response): Promise<any> {
         const { userName, ip } = request.body;
@@ -40,6 +41,22 @@ export class AuthHandler implements AuthHandlerInterface {
 
             return response.status(200).send({
                 message: "Usuario creado correctamente",
+                token
+            });
+        } catch (error) {
+            console.log(error);
+            return response.status(500).send({
+                message: "Error interno por favor intenta nuevamente",
+            });
+        }
+    }
+    async renewJsonWebToken(request: Request, response: Response): Promise<any> {
+        const { userId } = request.body;
+
+        try {
+            const token = await this.httpUtilsHandler.generateJsonWebToken(userId);
+
+            return response.status(200).send({
                 token
             });
         } catch (error) {
