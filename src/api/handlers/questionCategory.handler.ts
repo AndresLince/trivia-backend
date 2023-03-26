@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { CryptoHandlerInterface } from '../interfaces/handler/crypto.handler.interface';
 import { QuestionCategoryHandlerConstructorInterface, QuestionCategoryHandlerInterface } from '../interfaces/questionCategory.handler.interface';
 import { QuestionCategoryRepositoryInterface } from '../interfaces/questionCategory.repository.interface';
 import { HttpUtilsHandler } from './httpUtilsHandler';
@@ -6,14 +7,17 @@ import { HttpUtilsHandler } from './httpUtilsHandler';
 export class QuestionCategoryHandler implements QuestionCategoryHandlerInterface {
     private questionCategoryRepository: QuestionCategoryRepositoryInterface;
     private httpUtilsHandler: HttpUtilsHandler;
-    constructor({ questionCategoryRepository, httpUtilsHandler }: QuestionCategoryHandlerConstructorInterface) {
+    private cryptoHandler: CryptoHandlerInterface;
+    constructor({ questionCategoryRepository, httpUtilsHandler, cryptoHandler }: QuestionCategoryHandlerConstructorInterface) {
         this.questionCategoryRepository = questionCategoryRepository;
         this.httpUtilsHandler = httpUtilsHandler;
+        this.cryptoHandler = cryptoHandler;
         this.getAll = this.getAll.bind(this);
     }
     async getAll(request: Request, response: Response): Promise<any> {
         try {
             const questionCategories = await this.questionCategoryRepository.searchAll();
+            this.cryptoHandler.encryptFields(questionCategories, 'idQuestionCategory');
             return response.status(200).send({
                 data: questionCategories,
             });
