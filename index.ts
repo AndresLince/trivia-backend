@@ -1,4 +1,5 @@
 import { AuthHandler } from './src/api/handlers/auth.handler';
+import { CryptoHandler } from './src/api/handlers/crypto.handler';
 import { DatabaseMysqlHandler } from './src/api/handlers/database/database.mysql.handler';
 import { HttpUtilsHandler } from './src/api/handlers/httpUtilsHandler';
 import { QuestionCategoryHandler } from './src/api/handlers/questionCategory.handler';
@@ -10,6 +11,9 @@ const configService = new ConfigService();
 const databaseHandler = new DatabaseMysqlHandler({
     configService
 });
+const cryptoHandler = new CryptoHandler({
+    configService
+})
 const userRepository = new UserRepositoryMysql({
     databaseMysqlHandler: databaseHandler,
 });
@@ -26,6 +30,7 @@ const authHandler = new AuthHandler({
 const questionCategoryHandler = new QuestionCategoryHandler({
     questionCategoryRepository: questionCategoryRepository,
     httpUtilsHandler: httpUtilsHandler,
+    cryptoHandler
 });
 const serverHandler = new ServerHandler({
     authHandler,
