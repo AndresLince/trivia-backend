@@ -1,4 +1,4 @@
-import { DatabaseHandlerInterface } from "./database.handler";
+import { DatabaseHandlerInterface } from "../database.handler";
 
 export interface UserRepositoryInterface {
     createUser: Function;

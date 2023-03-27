@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { HttpUtilsHandler } from "../handlers/httpUtilsHandler";
-import { UserRepositoryInterface } from "./user.repository.interface";
+import { UserRepositoryInterface } from "./repository/user.repository.interface";
 
 export interface AuthHandlerConstructorInterface {
     userRepository: UserRepositoryInterface;

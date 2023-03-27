@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { AuthHandlerConstructorInterface, AuthHandlerInterface } from '../interfaces/auth.handler.interface';
 import { CreateUserModel } from '../interfaces/createUser.model';
-import { UserRepositoryInterface } from '../interfaces/user.repository.interface';
+import { UserRepositoryInterface } from '../interfaces/repository/user.repository.interface';
 import { HttpUtilsHandler } from './httpUtilsHandler';
 
 export class AuthHandler implements AuthHandlerInterface {

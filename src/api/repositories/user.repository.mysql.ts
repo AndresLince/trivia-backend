@@ -1,7 +1,7 @@
 import { CreateUserModel } from '../interfaces/createUser.model';
 import { InsertModel, UserModel } from '../interfaces/crud.responses.interface';
 import { DatabaseHandlerInterface } from '../interfaces/database.handler';
-import { UserRepositoryConstructorInterface, UserRepositoryInterface } from '../interfaces/user.repository.interface';
+import { UserRepositoryConstructorInterface, UserRepositoryInterface } from '../interfaces/repository/user.repository.interface';
 
 export class UserRepositoryMysql implements UserRepositoryInterface {
     private databaseHandler: DatabaseHandlerInterface;
