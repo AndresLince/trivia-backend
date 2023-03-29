@@ -22,7 +22,7 @@ export class AuthHandler implements AuthHandlerInterface {
         try {
             const user = await this.userRepository.searchUserByName(userModel);
             if (user && user.ip !== userModel.ip) {
-                return response.status(404).send({
+                return response.status(400).send({
                     message: "Ya existe un usuario con ese nombre",
                 });
             }
