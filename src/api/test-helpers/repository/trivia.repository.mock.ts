@@ -2,9 +2,13 @@ import { TriviaRepositoryInterface } from "../../interfaces/repository/trivia.re
 
 const create = jest.fn(triviaModel => {
     return [];
+});
+const search = jest.fn(triviaModel => {
+    return [];
 })
 const triviaRepository: TriviaRepositoryInterface = {
-    create
+    create,
+    search
 }
 
 export default triviaRepository;
