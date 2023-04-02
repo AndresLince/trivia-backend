@@ -8,7 +8,7 @@ import { RouteInterface } from '../interfaces/route/route.interface';
 export class ServerHandler {
     private authRoutes: AuthRoute;
     private questionCategoryRoute: QuestionCategoryRoute;
-    private triviaRoute: RouteInterface
+    private triviaRoute: RouteInterface;
     constructor({
         authHandler,
         httpUtilsHandler,
@@ -16,7 +16,7 @@ export class ServerHandler {
         triviaRoute
     }: ServerHandlerConstructorInterface) {
         this.authRoutes = new AuthRoute({ authHandler, httpUtilsHandler });
-        this.questionCategoryRoute = new QuestionCategoryRoute({ questionCategoryHandler, httpUtilsHandler })
+        this.questionCategoryRoute = new QuestionCategoryRoute({ questionCategoryHandler, httpUtilsHandler });
         this.triviaRoute = triviaRoute;
     }
     createServer(): Express {

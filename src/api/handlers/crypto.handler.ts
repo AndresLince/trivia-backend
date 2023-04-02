@@ -7,22 +7,22 @@ export class CryptoHandler implements CryptoHandlerInterface {
     constructor({ configService }: CryptoHandlerConstructorInterface) {
         this.configService = configService;
     }
-    encryptFields(arrayObjects: any[], field: string){
+    encryptFields(arrayObjects: any[], field: string) {
         arrayObjects.forEach((element) => {
-            if (element[field]) {
-                element[field] = this.encrypt(element[field].toString());
+            if (element[ field ]) {
+                element[ field ] = this.encrypt(element[ field ].toString());
             }
         });
-    };
-    encrypt(text: string){
+    }
+    encrypt(text: string) {
         const cipher = createCipheriv(
             this.configService.getConfig('CRYPTO_ALGORITHM'),
             this.configService.getConfig('CRYPTO_SECRET_KEY'),
             this.configService.getConfig('CRYPTO_IV'),
         );
 
-        const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
+        const encrypted = Buffer.concat([ cipher.update(text), cipher.final() ]);
 
         return encrypted.toString('hex');
-    };
+    }
 }
