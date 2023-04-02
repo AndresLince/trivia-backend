@@ -8,10 +8,11 @@ const router = Router();
 import { check } from 'express-validator';
 import { AuthRouteConstructorInterface } from "../interfaces/auth.route.interface";
 import { AuthHandlerInterface } from "../interfaces/auth.handler.interface";
+import { HttpUtilsHandlerInterface } from "../interfaces/handler/http.handler.interface";
 
 export class AuthRoute {
     private authHandler: AuthHandlerInterface;
-    private httpUtilsHandler: HttpUtilsHandler;
+    private httpUtilsHandler: HttpUtilsHandlerInterface;
     constructor({ authHandler, httpUtilsHandler }: AuthRouteConstructorInterface) {
         this.httpUtilsHandler = httpUtilsHandler;
         this.authHandler = authHandler;
