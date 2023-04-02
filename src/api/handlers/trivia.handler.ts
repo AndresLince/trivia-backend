@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import { CryptoHandlerInterface } from '../interfaces/handler/crypto.handler.interface';
+import { HttpUtilsHandlerInterface } from '../interfaces/handler/http.handler.interface';
 import { TriviaHandlerConstructorInterface, TriviaHandlerInterface } from '../interfaces/handler/trivia.handler.interface';
 import { CreateTrivia } from '../interfaces/model/create-trivia.model';
 import { TriviaRepositoryInterface } from '../interfaces/repository/trivia.repository.interface';
-import { HttpUtilsHandler } from './httpUtilsHandler';
 
 export class TriviaHandler implements TriviaHandlerInterface {
     private triviaRepository: TriviaRepositoryInterface;
-    private httpUtilsHandler: HttpUtilsHandler;
+    private httpUtilsHandler: HttpUtilsHandlerInterface;
     private cryptoHandler: CryptoHandlerInterface
     constructor({ triviaRepository, httpUtilsHandler, cryptoHandler }: TriviaHandlerConstructorInterface) {
         this.triviaRepository = triviaRepository;
