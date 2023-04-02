@@ -5,19 +5,15 @@ import { TriviaRoute } from "../../routes/trivia.route";
 import { ConfigService } from "../../services/config.service";
 import { AuthHandler } from "../auth.handler";
 import { CryptoHandler } from "../crypto.handler";
-import { DatabaseMysqlHandler } from "../database/database.mysql.handler";
-import { HttpUtilsHandler } from "../httpUtilsHandler";
 import { QuestionCategoryHandler } from "../questionCategory.handler";
 import { ServerHandler } from "../server.handler";
 import { TriviaHandler } from "../trivia.handler";
+import httpUtilsHandler from "../../test-helpers/handler/http-utils-handler.mock";
 
 const request = require('supertest')
 
 const configService = new ConfigService();
 const cryptoHandler = new CryptoHandler({
-    configService
-})
-const httpUtilsHandler = new HttpUtilsHandler({
     configService
 })
 const authHandler = new AuthHandler({
@@ -77,5 +73,10 @@ describe('Login tests', () => {
                     })
                 )
             })
+    })
+});
+describe('renew json web token', () => {
+    it('Should return 401 Unauthorized', () => {
+        return request(app).get('/api/auth/renew').expect(401);
     })
 });
