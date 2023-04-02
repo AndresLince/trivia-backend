@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { AuthHandlerConstructorInterface, AuthHandlerInterface } from '../interfaces/auth.handler.interface';
 import { CreateUserModel } from '../interfaces/createUser.model';
+import { HttpUtilsHandlerInterface } from '../interfaces/handler/http.handler.interface';
 import { UserRepositoryInterface } from '../interfaces/repository/user.repository.interface';
-import { HttpUtilsHandler } from './httpUtilsHandler';
 
 export class AuthHandler implements AuthHandlerInterface {
     private userRepository: UserRepositoryInterface;
-    private httpUtilsHandler: HttpUtilsHandler;
+    private httpUtilsHandler: HttpUtilsHandlerInterface;
     constructor({ userRepository, httpUtilsHandler }: AuthHandlerConstructorInterface) {
         this.userRepository = userRepository;
         this.httpUtilsHandler = httpUtilsHandler;
