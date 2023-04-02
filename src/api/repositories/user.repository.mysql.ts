@@ -18,14 +18,14 @@ export class UserRepositoryMysql implements UserRepositoryInterface {
     }
     async searchUserByName({ userName }: CreateUserModel): Promise<UserModel | null> {
         const sql = `call searchUserByName(?)`;
-        const result = await this.databaseHandler.getPool().query(sql, [userName]);
+        const result = await this.databaseHandler.getPool().query(sql, [ userName ]);
 
-        if (result[0].length === 0) {
+        if (result[ 0 ].length === 0) {
             return null;
         }
         let user: UserModel;
 
-        const userDb = result[0][0];
+        const userDb = result[ 0 ][ 0 ];
         user = {
             userName: userDb.userName,
             ip: userDb.ip,

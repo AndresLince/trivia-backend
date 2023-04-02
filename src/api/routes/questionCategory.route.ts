@@ -12,7 +12,7 @@ export class QuestionCategoryRoute {
     private httpUtilsHandler: HttpUtilsHandlerInterface;
     constructor({ questionCategoryHandler, httpUtilsHandler }: QuestionCategoryRouteConstructorInterface) {
         this.questionCategoryHandler = questionCategoryHandler;
-        this.httpUtilsHandler = httpUtilsHandler
+        this.httpUtilsHandler = httpUtilsHandler;
     }
 
     createRoutes(): Router {

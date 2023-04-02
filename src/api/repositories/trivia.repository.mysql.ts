@@ -11,22 +11,22 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
     }
     async create({ idUser, idQuestionCategory }: CreateTrivia): Promise<InsertModel> {
         const sql = `call createTrivia(?,?, @last_id)`;
-        await this.databaseHandler.getPool().query(sql, [idUser, idQuestionCategory]);
+        await this.databaseHandler.getPool().query(sql, [ idUser, idQuestionCategory ]);
 
         const sql2 = `SELECT @last_id AS insertId`;
         const result = await this.databaseHandler.getPool().query(sql2);
-        return result[0];
+        return result[ 0 ];
     }
     async search(idUser: string): Promise<TriviaModel | null> {
         const sql = `call searchTrivia(?)`;
-        const result = await this.databaseHandler.getPool().query(sql, [idUser]);
+        const result = await this.databaseHandler.getPool().query(sql, [ idUser ]);
 
-        if (result[0].length === 0) {
+        if (result[ 0 ].length === 0) {
             return null;
         }
         let trivia: TriviaModel;
 
-        const triviaDb = result[0][0];
+        const triviaDb = result[ 0 ][ 0 ];
         trivia = {
             idTrivia: triviaDb.idTrivia,
             idUser: triviaDb.idUser,
