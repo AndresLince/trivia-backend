@@ -2,14 +2,14 @@
 Route: /api/question-category
 */
 import { Router } from 'express';
-import { HttpUtilsHandler } from '../handlers/httpUtilsHandler';
+import { HttpUtilsHandlerInterface } from '../interfaces/handler/http.handler.interface';
 const router = Router();
 import { QuestionCategoryHandlerInterface } from '../interfaces/questionCategory.handler.interface';
 import { QuestionCategoryRouteConstructorInterface } from '../interfaces/route/questionCategory.route.interface';
 
 export class QuestionCategoryRoute {
     private questionCategoryHandler: QuestionCategoryHandlerInterface;
-    private httpUtilsHandler: HttpUtilsHandler;
+    private httpUtilsHandler: HttpUtilsHandlerInterface;
     constructor({ questionCategoryHandler, httpUtilsHandler }: QuestionCategoryRouteConstructorInterface) {
         this.questionCategoryHandler = questionCategoryHandler;
         this.httpUtilsHandler = httpUtilsHandler
