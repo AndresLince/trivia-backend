@@ -32,6 +32,6 @@ const httpUtilsHandler: HttpUtilsHandlerInterface = {
     validateFields,
     generateJsonWebToken,
     sendBasicJsonResponse,
-}
+};
 
 export default httpUtilsHandler;

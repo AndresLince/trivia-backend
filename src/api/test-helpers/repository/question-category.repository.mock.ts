@@ -2,9 +2,9 @@ import { QuestionCategoryRepositoryInterface } from "../../interfaces/questionCa
 
 const searchAll = jest.fn(questionCategoryModel => {
    return [];
-})
+});
 const questionCategoryRepository: QuestionCategoryRepositoryInterface = {
     searchAll
-}
+};
 
 export default questionCategoryRepository;

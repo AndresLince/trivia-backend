@@ -14,7 +14,7 @@ export class TriviaRoute implements RouteInterface {
     private httpUtilsHandler: HttpUtilsHandlerInterface;
     constructor({ triviaHandler, httpUtilsHandler }: TriviaRouteConstructorInterface) {
         this.triviaHandler = triviaHandler;
-        this.httpUtilsHandler = httpUtilsHandler
+        this.httpUtilsHandler = httpUtilsHandler;
     }
 
     createRoutes(): Router {
