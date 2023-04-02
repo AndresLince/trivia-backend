@@ -1,11 +1,11 @@
 import { RequestHandler } from "express";
-import { HttpUtilsHandler } from "../../handlers/httpUtilsHandler";
 import { TriviaRepositoryInterface } from "../repository/trivia.repository.interface";
 import { CryptoHandlerInterface } from "./crypto.handler.interface";
+import { HttpUtilsHandlerInterface } from "./http.handler.interface";
 
 export interface TriviaHandlerConstructorInterface {
     triviaRepository: TriviaRepositoryInterface;
-    httpUtilsHandler: HttpUtilsHandler;
+    httpUtilsHandler: HttpUtilsHandlerInterface;
     cryptoHandler: CryptoHandlerInterface
 }
 
