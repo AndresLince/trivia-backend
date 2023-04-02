@@ -53,7 +53,8 @@ describe('Login tests', () => {
                     expect.objectContaining({
                         token: expect.any(String),
                     })
-                )
+                ),
+                expect(response.status).toBe(200)
             })
     })
     it('Should return 400 user already exist with that name and another Ip', () => {
@@ -78,5 +79,24 @@ describe('Login tests', () => {
 describe('renew json web token', () => {
     it('Should return 401 Unauthorized', () => {
         return request(app).get('/api/auth/renew').expect(401);
+    })
+    it('Should return 200 successful renew token', () => {
+        return request(app).get('/api/auth/renew').set(
+            { 'x-token': 'mytokennewuser' }
+        ).then((response: Response) => {
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    token: expect.any(String),
+                })
+            ),
+            expect(response.status).toBe(200)
+        })
+    })
+    it('Should return 401 Unauthorized', () => {
+        return request(app).get('/api/auth/renew').set(
+            { 'x-token': 'invalidToken' }
+        ).then((response: Response) => {
+            expect(response.status).toBe(401)
+        })
     })
 });
