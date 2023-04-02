@@ -1,7 +1,7 @@
-import { HttpUtilsHandler } from "../handlers/httpUtilsHandler";
 import { AuthHandlerInterface } from "./auth.handler.interface";
+import { HttpUtilsHandlerInterface } from "./handler/http.handler.interface";
 
 export interface AuthRouteConstructorInterface {
     authHandler: AuthHandlerInterface;
-    httpUtilsHandler: HttpUtilsHandler
+    httpUtilsHandler: HttpUtilsHandlerInterface
 }
