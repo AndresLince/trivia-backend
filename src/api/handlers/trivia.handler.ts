@@ -8,7 +8,7 @@ import { TriviaRepositoryInterface } from '../interfaces/repository/trivia.repos
 export class TriviaHandler implements TriviaHandlerInterface {
     private triviaRepository: TriviaRepositoryInterface;
     private httpUtilsHandler: HttpUtilsHandlerInterface;
-    private cryptoHandler: CryptoHandlerInterface
+    private cryptoHandler: CryptoHandlerInterface;
     constructor({ triviaRepository, httpUtilsHandler, cryptoHandler }: TriviaHandlerConstructorInterface) {
         this.triviaRepository = triviaRepository;
         this.httpUtilsHandler = httpUtilsHandler;

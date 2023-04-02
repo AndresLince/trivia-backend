@@ -11,10 +11,10 @@ export class QuestionCategoryRepositoryMysql implements QuestionCategoryReposito
         const sql = `call searchQuestionCategories()`;
         const result = await this.databaseHandler.getPool().query(sql);
 
-        if (result[0].length === 0) {
+        if (result[ 0 ].length === 0) {
             return null;
         }
 
-        return result[0];
+        return result[ 0 ];
     }
 }
