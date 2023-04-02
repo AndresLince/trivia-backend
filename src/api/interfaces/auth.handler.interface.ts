@@ -1,10 +1,10 @@
 import { RequestHandler } from "express";
-import { HttpUtilsHandler } from "../handlers/httpUtilsHandler";
+import { HttpUtilsHandlerInterface } from "./handler/http.handler.interface";
 import { UserRepositoryInterface } from "./repository/user.repository.interface";
 
 export interface AuthHandlerConstructorInterface {
     userRepository: UserRepositoryInterface;
-    httpUtilsHandler: HttpUtilsHandler
+    httpUtilsHandler: HttpUtilsHandlerInterface
 }
 
 export interface AuthHandlerInterface {
