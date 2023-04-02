@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { CryptoHandlerInterface } from '../interfaces/handler/crypto.handler.interface';
+import { HttpUtilsHandlerInterface } from '../interfaces/handler/http.handler.interface';
 import { QuestionCategoryHandlerConstructorInterface, QuestionCategoryHandlerInterface } from '../interfaces/questionCategory.handler.interface';
 import { QuestionCategoryRepositoryInterface } from '../interfaces/questionCategory.repository.interface';
-import { HttpUtilsHandler } from './httpUtilsHandler';
 
 export class QuestionCategoryHandler implements QuestionCategoryHandlerInterface {
     private questionCategoryRepository: QuestionCategoryRepositoryInterface;
-    private httpUtilsHandler: HttpUtilsHandler;
+    private httpUtilsHandler: HttpUtilsHandlerInterface;
     private cryptoHandler: CryptoHandlerInterface;
     constructor({ questionCategoryRepository, httpUtilsHandler, cryptoHandler }: QuestionCategoryHandlerConstructorInterface) {
         this.questionCategoryRepository = questionCategoryRepository;
