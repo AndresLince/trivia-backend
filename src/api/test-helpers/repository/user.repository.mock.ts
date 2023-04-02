@@ -1,4 +1,4 @@
-import { UserRepositoryInterface } from "../../interfaces/repository/user.repository.interface"
+import { UserRepositoryInterface } from "../../interfaces/repository/user.repository.interface";
 
 const searchUserByName = jest.fn(userModel => {
     const user = {
@@ -14,13 +14,13 @@ const searchUserByName = jest.fn(userModel => {
         return null;
     }
     return user;
-})
+});
 const createUser = jest.fn(userModel => {
     return [];
-})
+});
 const userRepositoryMock: UserRepositoryInterface = {
     searchUserByName,
     createUser
-}
+};
 
 export default userRepositoryMock;

@@ -16,7 +16,7 @@ const databaseHandler = new DatabaseMysqlHandler({
 });
 const cryptoHandler = new CryptoHandler({
     configService
-})
+});
 const userRepository = new UserRepositoryMysql({
     databaseMysqlHandler: databaseHandler,
 });
@@ -28,7 +28,7 @@ const triviaRepository = new TriviaRepositoryMysql({
 });
 const httpUtilsHandler = new HttpUtilsHandler({
     configService
-})
+});
 const authHandler = new AuthHandler({
     userRepository: userRepository,
     httpUtilsHandler: httpUtilsHandler,

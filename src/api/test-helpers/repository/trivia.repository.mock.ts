@@ -5,10 +5,10 @@ const create = jest.fn(triviaModel => {
 });
 const search = jest.fn(triviaModel => {
     return [];
-})
+});
 const triviaRepository: TriviaRepositoryInterface = {
     create,
     search
-}
+};
 
 export default triviaRepository;
