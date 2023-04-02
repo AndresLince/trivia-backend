@@ -2,6 +2,7 @@ import { DatabaseHandlerInterface } from "../database.handler";
 
 export interface TriviaRepositoryInterface {
     create: Function;
+    addQuestionsToTrivia: Function;
     search: Function;
 }
 

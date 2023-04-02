@@ -4,6 +4,7 @@ import { HttpUtilsHandlerInterface } from '../interfaces/handler/http.handler.in
 import { TriviaHandlerConstructorInterface, TriviaHandlerInterface } from '../interfaces/handler/trivia.handler.interface';
 import { CreateTrivia } from '../interfaces/model/create-trivia.model';
 import { TriviaRepositoryInterface } from '../interfaces/repository/trivia.repository.interface';
+import { AddQuestionsToTrivia } from '../interfaces/model/add-question-to-trivia.model';
 
 export class TriviaHandler implements TriviaHandlerInterface {
     private triviaRepository: TriviaRepositoryInterface;
@@ -32,6 +33,13 @@ export class TriviaHandler implements TriviaHandlerInterface {
             }
 
             const { insertId } = await this.triviaRepository.create(triviaModel);
+
+            const addQuestionsToTriviaModel: AddQuestionsToTrivia = {
+                idTrivia: insertId,
+                idQuestionCategory: idQuestionCategory,
+            };
+
+            await this.triviaRepository.addQuestionsToTrivia(addQuestionsToTriviaModel);
 
             return response.status(200).send({
                 idTrivia: this.cryptoHandler.encrypt(insertId.toString()),

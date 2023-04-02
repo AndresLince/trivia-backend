@@ -1,5 +1,6 @@
 import { InsertModel } from '../interfaces/crud.responses.interface';
 import { DatabaseHandlerInterface } from '../interfaces/database.handler';
+import { AddQuestionsToTrivia } from '../interfaces/model/add-question-to-trivia.model';
 import { CreateTrivia } from '../interfaces/model/create-trivia.model';
 import { TriviaModel } from '../interfaces/model/trivia.model';
 import { TriviaConstructorInterface, TriviaRepositoryInterface } from '../interfaces/repository/trivia.repository.interface';
@@ -16,6 +17,11 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
         const sql2 = `SELECT @last_id AS insertId`;
         const result = await this.databaseHandler.getPool().query(sql2);
         return result[ 0 ];
+    }
+    async addQuestionsToTrivia({ idTrivia, idQuestionCategory }: AddQuestionsToTrivia): Promise<Boolean> {
+        const sql = `call addQuestionsToTrivia(?, ?)`;
+        const response = await this.databaseHandler.getPool().query(sql, [ idTrivia, idQuestionCategory ]);
+        return response.affectedRows > 0;
     }
     async search(idUser: string): Promise<TriviaModel | null> {
         const sql = `call searchTrivia(?)`;
