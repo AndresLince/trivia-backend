@@ -21,7 +21,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
 
         const triviaModel: CreateTrivia = {
             idUser: userId,
-            idQuestionCategory: idQuestionCategory,
+            idQuestionCategory: this.cryptoHandler.decrypt(idQuestionCategory),
         };
 
         try {
