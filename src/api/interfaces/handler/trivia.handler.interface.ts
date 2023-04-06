@@ -6,9 +6,10 @@ import { HttpUtilsHandlerInterface } from "./http.handler.interface";
 export interface TriviaHandlerConstructorInterface {
     triviaRepository: TriviaRepositoryInterface;
     httpUtilsHandler: HttpUtilsHandlerInterface;
-    cryptoHandler: CryptoHandlerInterface
+    cryptoHandler: CryptoHandlerInterface;
 }
 
 export interface TriviaHandlerInterface {
     create: RequestHandler;
+    getQuestion: RequestHandler;
 }
