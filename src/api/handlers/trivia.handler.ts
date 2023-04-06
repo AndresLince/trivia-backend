@@ -49,4 +49,23 @@ export class TriviaHandler implements TriviaHandlerInterface {
             return this.httpUtilsHandler.sendBasicJsonResponse(response, 500, "Error interno por favor intenta nuevamente");
         }
     }
+    async getQuestion(request: Request, response: Response): Promise<any> {
+        const { idTrivia } = request.body;
+
+        try {
+            const question = await this.triviaRepository.getQuestion(idTrivia);
+            if (question) {
+                return response.status(200).send({
+                    data: question
+                });
+            }
+
+            return response.status(404).send({
+                data: {}
+            });
+        } catch (error) {
+            console.log(error);
+            return this.httpUtilsHandler.sendBasicJsonResponse(response, 500, "Error interno por favor intenta nuevamente");
+        }
+    }
 }
