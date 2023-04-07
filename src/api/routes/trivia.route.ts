@@ -18,10 +18,16 @@ export class TriviaRoute implements RouteInterface {
     }
 
     createRoutes(): Router {
-        return router.post('/', [
+        router.post('/', [
             this.httpUtilsHandler.validateJsonWebToken,
             check('idQuestionCategory', 'La categoria es obligatoria').not().isEmpty(),
             this.httpUtilsHandler.validateFields
         ], this.triviaHandler.create);
+        router.get('/question', [
+            this.httpUtilsHandler.validateJsonWebToken,
+            check('idTrivia', 'La trivia es obligatoria').not().isEmpty(),
+            this.httpUtilsHandler.validateFields
+        ], this.triviaHandler.getQuestion);
+        return router;
     }
 }
