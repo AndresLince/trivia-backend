@@ -43,7 +43,7 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
         return trivia;
     }
     async getQuestion(idTrivia: string): Promise<Question | null> {
-        const sql = `call getQuestionTrivia(?)`;
+        const sql = `call getTriviaQuestion(?)`;
         const result = await this.databaseHandler.getPool().query(sql, [ idTrivia ]);
 
         if (result[ 0 ].length === 0) {
@@ -54,7 +54,7 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
         const questionDb = result[ 0 ][ 0 ];
         question = {
             idQuestion: questionDb.idTrivia,
-            description: questionDb.description,
+            description: questionDb.questionDescription,
             answers: []
         };
 
