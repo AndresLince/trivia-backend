@@ -15,6 +15,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
         this.httpUtilsHandler = httpUtilsHandler;
         this.cryptoHandler = cryptoHandler;
         this.create = this.create.bind(this);
+        this.getQuestion = this.getQuestion.bind(this);
     }
     async create(request: Request, response: Response): Promise<any> {
         const { userId, idQuestionCategory } = request.body;
