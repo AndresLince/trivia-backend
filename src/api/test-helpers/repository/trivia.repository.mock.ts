@@ -6,9 +6,17 @@ const create = jest.fn(triviaModel => {
 const search = jest.fn(triviaModel => {
     return [];
 });
+const addQuestionsToTrivia = jest.fn(triviaModel => {
+    return [];
+});
+const getQuestion = jest.fn(triviaModel => {
+    return [];
+});
 const triviaRepository: TriviaRepositoryInterface = {
     create,
-    search
+    search,
+    addQuestionsToTrivia,
+    getQuestion,
 };
 
 export default triviaRepository;
