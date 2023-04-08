@@ -56,6 +56,8 @@ export class TriviaHandler implements TriviaHandlerInterface {
         try {
             const question = await this.triviaRepository.getQuestion(idTrivia);
             if (question) {
+                this.cryptoHandler.encryptFields(question.answers, 'idAnswer');
+                question.idQuestion = this.cryptoHandler.encrypt(question.idQuestion.toString());
                 return response.status(200).send({
                     data: question
                 });
