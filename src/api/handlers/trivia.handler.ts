@@ -51,7 +51,8 @@ export class TriviaHandler implements TriviaHandlerInterface {
         }
     }
     async getQuestion(request: Request, response: Response): Promise<any> {
-        const { idTrivia } = request.params;
+        let { idTrivia } = request.params;
+        idTrivia = this.cryptoHandler.decrypt(idTrivia);
 
         try {
             const question = await this.triviaRepository.getQuestion(idTrivia);
