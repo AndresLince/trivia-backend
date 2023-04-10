@@ -33,7 +33,7 @@ export class CryptoHandler implements CryptoHandlerInterface {
     }
     decrypt(hash: string): string {
         const decipher = createDecipheriv(this.algorithm, this.secretKey, this.iv);
-        const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash, 'hex')), decipher.final()]);
+        const decrpyted = Buffer.concat([ decipher.update(Buffer.from(hash, 'hex')), decipher.final() ]);
         return decrpyted.toString();
-    };
+    }
 }

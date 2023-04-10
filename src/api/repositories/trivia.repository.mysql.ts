@@ -20,7 +20,7 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
         const result = await this.databaseHandler.getPool().query(sql2);
         return result[ 0 ];
     }
-    async addQuestionsToTrivia({ idTrivia, idQuestionCategory }: AddQuestionsToTrivia): Promise<Boolean> {
+    async addQuestionsToTrivia({ idTrivia, idQuestionCategory }: AddQuestionsToTrivia): Promise<boolean> {
         const sql = `call addQuestionsToTrivia(?, ?)`;
         const response = await this.databaseHandler.getPool().query(sql, [ idTrivia, idQuestionCategory ]);
         return response.affectedRows > 0;
@@ -58,11 +58,11 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
             description: questionDb.questionDescription,
             answers: []
         };
-        result[0].forEach((element: any) => {
+        result[ 0 ].forEach((element: any) => {
             const answer: Answer =  {
                 idAnswer: element.idAnswer,
                 description: element.answerDescription
-            }
+            };
             question.answers.push(answer);
         });
 
