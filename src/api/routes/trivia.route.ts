@@ -23,6 +23,13 @@ export class TriviaRoute implements RouteInterface {
             check('idQuestionCategory', 'La categoria es obligatoria').not().isEmpty(),
             this.httpUtilsHandler.validateFields
         ], this.triviaHandler.create);
+        router.put('/answer', [
+            this.httpUtilsHandler.validateJsonWebToken,
+            check('idTrivia', 'La trivia es obligatoria').not().isEmpty(),
+            check('idQuestion', 'La pregunta es obligatoria').not().isEmpty(),
+            check('idSelectedAnswer', 'La respuesta es obligatoria').not().isEmpty(),
+            this.httpUtilsHandler.validateFields
+        ], this.triviaHandler.setSelectedAnswer);
         router.get('/question/:idTrivia', [
             this.httpUtilsHandler.validateJsonWebToken
         ], this.triviaHandler.getQuestion);
