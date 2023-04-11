@@ -5,6 +5,7 @@ export interface TriviaRepositoryInterface {
     addQuestionsToTrivia: Function;
     search: Function;
     getQuestion: Function;
+    setSelectedAnswer: Function;
 }
 
 export interface TriviaConstructorInterface{
