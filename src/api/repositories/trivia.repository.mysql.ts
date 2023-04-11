@@ -4,6 +4,7 @@ import { AddQuestionsToTrivia } from '../interfaces/model/add-question-to-trivia
 import { Answer } from '../interfaces/model/answer.model';
 import { CreateTrivia } from '../interfaces/model/create-trivia.model';
 import { Question } from '../interfaces/model/question.model';
+import { SetSelectedAnswer } from '../interfaces/model/set-selected-answer.model';
 import { TriviaModel } from '../interfaces/model/trivia.model';
 import { TriviaConstructorInterface, TriviaRepositoryInterface } from '../interfaces/repository/trivia.repository.interface';
 
@@ -67,5 +68,15 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
         });
 
         return question;
+    }
+    async setSelectedAnswer({ idTrivia, idQuestion, idSelectedAnswer }: SetSelectedAnswer): Promise<boolean> {
+        const sql = `call setSelectedAnswer(?, ?, ?)`;
+        const result = await this.databaseHandler.getPool().query(sql, [ idTrivia, idQuestion, idSelectedAnswer ]);
+
+        if (result.affectedRows === 0) {
+            return false;
+        }
+
+        return true;
     }
 }
