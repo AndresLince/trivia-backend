@@ -5,6 +5,7 @@ import { TriviaHandlerConstructorInterface, TriviaHandlerInterface } from '../in
 import { CreateTrivia } from '../interfaces/model/create-trivia.model';
 import { TriviaRepositoryInterface } from '../interfaces/repository/trivia.repository.interface';
 import { AddQuestionsToTrivia } from '../interfaces/model/add-question-to-trivia.model';
+import { SetSelectedAnswer } from '../interfaces/model/set-selected-answer.model';
 
 export class TriviaHandler implements TriviaHandlerInterface {
     private triviaRepository: TriviaRepositoryInterface;
@@ -16,6 +17,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
         this.cryptoHandler = cryptoHandler;
         this.create = this.create.bind(this);
         this.getQuestion = this.getQuestion.bind(this);
+        this.setSelectedAnswer = this.setSelectedAnswer.bind(this);
     }
     async create(request: Request, response: Response): Promise<any> {
         const { userId, idQuestionCategory } = request.body;
@@ -66,6 +68,31 @@ export class TriviaHandler implements TriviaHandlerInterface {
 
             return response.status(404).send({
                 data: {}
+            });
+        } catch (error) {
+            console.log(error);
+            return this.httpUtilsHandler.sendBasicJsonResponse(response, 500, "Error interno por favor intenta nuevamente");
+        }
+    }
+    async setSelectedAnswer(request: Request, response: Response): Promise<any> {
+        const { idTrivia, idQuestion, idSelectedAnswer } = request.body;
+
+        const selectedAnswerModel: SetSelectedAnswer = {
+            idTrivia: this.cryptoHandler.decrypt(idTrivia.toString()),
+            idQuestion: this.cryptoHandler.decrypt(idQuestion.toString()),
+            idSelectedAnswer: this.cryptoHandler.decrypt(idSelectedAnswer.toString())
+        };
+
+        try {
+            const result = await this.triviaRepository.setSelectedAnswer(selectedAnswerModel);
+            if (result) {
+                return response.status(200).send({
+                    message: 'Se actualizo correctamente la respuesta'
+                });
+            }
+
+            return response.status(404).send({
+                message: 'Error datos incorrectos'
             });
         } catch (error) {
             console.log(error);
