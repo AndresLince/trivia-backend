@@ -55,7 +55,7 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
 
         const questionDb = result[ 0 ][ 0 ];
         question = {
-            idQuestion: questionDb.idTrivia,
+            idQuestion: questionDb.idQuestion,
             description: questionDb.questionDescription,
             answers: []
         };
