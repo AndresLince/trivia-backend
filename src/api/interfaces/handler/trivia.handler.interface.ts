@@ -13,4 +13,5 @@ export interface TriviaHandlerInterface {
     create: RequestHandler;
     getQuestion: RequestHandler;
     setSelectedAnswer: RequestHandler;
+    getSummary: RequestHandler;
 }
