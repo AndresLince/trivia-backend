@@ -33,6 +33,9 @@ export class TriviaRoute implements RouteInterface {
         router.get('/question/:idTrivia', [
             this.httpUtilsHandler.validateJsonWebToken
         ], this.triviaHandler.getQuestion);
+        router.get('/summary/:idTrivia', [
+            this.httpUtilsHandler.validateJsonWebToken
+        ], this.triviaHandler.getSummary);
         return router;
     }
 }
