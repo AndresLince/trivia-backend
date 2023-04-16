@@ -6,6 +6,7 @@ export interface TriviaRepositoryInterface {
     search: Function;
     getQuestion: Function;
     setSelectedAnswer: Function;
+    getScore: Function;
 }
 
 export interface TriviaConstructorInterface{
