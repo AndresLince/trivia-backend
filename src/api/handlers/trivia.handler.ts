@@ -18,6 +18,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
         this.create = this.create.bind(this);
         this.getQuestion = this.getQuestion.bind(this);
         this.setSelectedAnswer = this.setSelectedAnswer.bind(this);
+        this.getSummary = this.getSummary.bind(this);
     }
     async create(request: Request, response: Response): Promise<any> {
         const { userId, idQuestionCategory } = request.body;
@@ -88,6 +89,28 @@ export class TriviaHandler implements TriviaHandlerInterface {
             if (result) {
                 return response.status(200).send({
                     message: 'Se actualizo correctamente la respuesta'
+                });
+            }
+
+            return response.status(404).send({
+                message: 'Error datos incorrectos'
+            });
+        } catch (error) {
+            console.log(error);
+            return this.httpUtilsHandler.sendBasicJsonResponse(response, 500, "Error interno por favor intenta nuevamente");
+        }
+    }
+
+    async getSummary(request: Request, response: Response): Promise<any> {
+        let { idTrivia } = request.params;
+
+        idTrivia = this.cryptoHandler.decrypt(idTrivia);
+
+        try {
+            const score = await this.triviaRepository.getScore(idTrivia);
+            if (score !== null) {
+                return response.status(200).send({
+                    score
                 });
             }
 
