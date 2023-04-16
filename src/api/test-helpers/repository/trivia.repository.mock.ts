@@ -15,12 +15,16 @@ const getQuestion = jest.fn(triviaModel => {
 const setSelectedAnswer = jest.fn(triviaModel => {
     return [];
 });
+const getScore = jest.fn(triviaModel => {
+    return [];
+});
 const triviaRepository: TriviaRepositoryInterface = {
     create,
     search,
     addQuestionsToTrivia,
     getQuestion,
-    setSelectedAnswer
+    setSelectedAnswer,
+    getScore,
 };
 
 export default triviaRepository;
