@@ -103,10 +103,18 @@ export class TriviaHandler implements TriviaHandlerInterface {
 
     async getSummary(request: Request, response: Response): Promise<any> {
         let { idTrivia } = request.params;
+        const { userId } = request.body;
 
         idTrivia = this.cryptoHandler.decrypt(idTrivia);
 
         try {
+            const update = await this.triviaRepository.closeTrivia(idTrivia, userId);
+            if (!update) {
+                return response.status(400).send({
+                    message: 'Error al cerrar la trivia'
+                });
+            }
+
             const score = await this.triviaRepository.getScore(idTrivia);
             if (score !== null) {
                 return response.status(200).send({
