@@ -21,11 +21,12 @@ export class TriviaHandler implements TriviaHandlerInterface {
         this.getSummary = this.getSummary.bind(this);
     }
     async create(request: Request, response: Response): Promise<any> {
-        const { userId, idQuestionCategory } = request.body;
+        let { userId, idQuestionCategory } = request.body;
+        idQuestionCategory = this.cryptoHandler.decrypt(idQuestionCategory);
 
         const triviaModel: CreateTrivia = {
             idUser: userId,
-            idQuestionCategory: this.cryptoHandler.decrypt(idQuestionCategory),
+            idQuestionCategory: idQuestionCategory,
         };
 
         try {
