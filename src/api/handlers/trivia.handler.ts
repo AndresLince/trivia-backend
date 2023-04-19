@@ -109,11 +109,14 @@ export class TriviaHandler implements TriviaHandlerInterface {
         idTrivia = this.cryptoHandler.decrypt(idTrivia);
 
         try {
-            const update = await this.triviaRepository.closeTrivia(idTrivia, userId);
-            if (!update) {
-                return response.status(400).send({
-                    message: 'Error al cerrar la trivia'
-                });
+            const trivia = await this.triviaRepository.search(userId);
+            if (trivia && trivia.idTrivia === idTrivia) {
+                const update = await this.triviaRepository.closeTrivia(idTrivia, userId);
+                if (!update) {
+                    return response.status(400).send({
+                        message: 'Error al cerrar la trivia'
+                    });
+                }
             }
 
             const score = await this.triviaRepository.getScore(idTrivia);
