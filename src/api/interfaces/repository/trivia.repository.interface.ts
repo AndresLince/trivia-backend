@@ -9,6 +9,7 @@ export interface TriviaRepositoryInterface {
     getScore: Function;
     closeTrivia: Function;
     getUserScore: Function;
+    createUserScore: Function;
 }
 
 export interface TriviaConstructorInterface{
