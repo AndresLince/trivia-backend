@@ -120,9 +120,21 @@ export class TriviaHandler implements TriviaHandlerInterface {
             }
 
             const score = await this.triviaRepository.getScore(idTrivia);
-            if (score !== null) {
+            if (!score) {
+                return response.status(400).send({
+                    message: 'Error al consultar el puntaje'
+                });
+            }
+
+            if (trivia && trivia.idTrivia === idTrivia) {
+                const { insertId } = await this.triviaRepository.createUserScore(userId, score);
+            }
+
+            const userScore = await this.triviaRepository.getUserScore(idTrivia);
+            if (userScore !== null) {
                 return response.status(200).send({
-                    score
+                    score: score,
+                    scores: userScore
                 });
             }
 
