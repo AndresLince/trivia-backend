@@ -24,6 +24,9 @@ const closeTrivia = jest.fn(triviaModel => {
 const getUserScore = jest.fn(triviaModel => {
     return true;
 });
+const createUserScore = jest.fn(triviaModel => {
+    return true;
+});
 const triviaRepository: TriviaRepositoryInterface = {
     create,
     search,
@@ -33,6 +36,7 @@ const triviaRepository: TriviaRepositoryInterface = {
     getScore,
     closeTrivia,
     getUserScore,
+    createUserScore,
 };
 
 export default triviaRepository;
