@@ -89,6 +89,17 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
 
         return result[0][0].score;
     }
+
+    async getUserScore(): Promise<number|null> {
+        const sql = `call getUserScore()`;
+        const result = await this.databaseHandler.getPool().query(sql);
+        if (result[0].length === 0) {
+            return null;
+        }
+
+        return result[0];
+    }
+
     async closeTrivia(idUser: string, idTrivia: string): Promise<boolean> {
         const sql = `call closeTrivia(?, ?)`;
         const result = await this.databaseHandler.getPool().query(sql, [ idUser, idTrivia ]);
