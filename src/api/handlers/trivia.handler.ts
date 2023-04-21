@@ -110,7 +110,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
 
         try {
             const trivia = await this.triviaRepository.search(userId);
-            if (trivia && trivia.idTrivia === idTrivia) {
+            if (trivia && trivia.idTrivia == idTrivia) {
                 const update = await this.triviaRepository.closeTrivia(idTrivia, userId);
                 if (!update) {
                     return response.status(400).send({
@@ -126,7 +126,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
                 });
             }
 
-            if (trivia && trivia.idTrivia === idTrivia) {
+            if (trivia && trivia.idTrivia == idTrivia) {
                 const { insertId } = await this.triviaRepository.createUserScore(userId, score);
             }
 
