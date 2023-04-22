@@ -6,6 +6,7 @@ import { CreateTrivia } from '../interfaces/model/create-trivia.model';
 import { Question } from '../interfaces/model/question.model';
 import { SetSelectedAnswer } from '../interfaces/model/set-selected-answer.model';
 import { TriviaModel } from '../interfaces/model/trivia.model';
+import { UserScore } from '../interfaces/model/user-score.model';
 import { TriviaConstructorInterface, TriviaRepositoryInterface } from '../interfaces/repository/trivia.repository.interface';
 
 export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
@@ -90,7 +91,7 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
         return result[0][0].score;
     }
 
-    async getUserScore(): Promise<number|null> {
+    async getUserScore(): Promise<UserScore[]|null> {
         const sql = `call getUserScore(?)`;
         const result = await this.databaseHandler.getPool().query(sql, [ 5 ]);
         if (result[0].length === 0) {
