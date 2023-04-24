@@ -9,6 +9,10 @@ const validateJsonWebToken = jest.fn((request, response, next) => {
     if (token === 'invalidToken') {
         return response.status(401).json();
     }
+    if (token === 'exceptionToken') {
+        request.body.userId = 'exceptionUserId';
+    }
+
     next();
 });
 const validateFields = jest.fn((request, response, next) => {
@@ -21,7 +25,11 @@ const validateFields = jest.fn((request, response, next) => {
 
     next();
 });
-const generateJsonWebToken = jest.fn(token => {
+const generateJsonWebToken = jest.fn(userId => {
+    console.log(userId);
+    if (userId === 'exceptionUserId') {
+        throw new Error('Parameter is not a number!');
+    }
     return '';
 });
 const sendBasicJsonResponse = jest.fn(token => {
