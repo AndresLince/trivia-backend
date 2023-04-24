@@ -13,6 +13,9 @@ const searchUserByName = jest.fn(userModel => {
     if (userModel.userName === 'newUserName') {
         return null;
     }
+    if (userModel.userName === 'exceptionUserName') {
+        throw new Error('Exception on userName');
+    }
     return user;
 });
 const createUser = jest.fn(userModel => {
