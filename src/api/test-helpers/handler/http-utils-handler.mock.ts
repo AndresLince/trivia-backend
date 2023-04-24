@@ -28,7 +28,7 @@ const validateFields = jest.fn((request, response, next) => {
 const generateJsonWebToken = jest.fn(userId => {
     console.log(userId);
     if (userId === 'exceptionUserId') {
-        throw new Error('Parameter is not a number!');
+        throw new Error('Exception on userId');
     }
     return '';
 });
