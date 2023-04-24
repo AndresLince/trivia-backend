@@ -75,6 +75,14 @@ describe('Login tests', () => {
                 );
             });
     });
+    it('Should return 500 Internal server error', () => {
+        return request(app).post('/api/auth/signup')
+            .send(
+                { 'userName': 'exceptionUserName', 'ip': '116.117.12.15' }
+            ).then((response: Response) => {
+                expect(response.status).toBe(500);
+            });
+    });
 });
 describe('renew json web token', () => {
     it('Should return 401 Unauthorized', () => {
