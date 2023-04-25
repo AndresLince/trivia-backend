@@ -1,44 +1,6 @@
-import questionCategoryRepository from "../../test-helpers/repository/question-category.repository.mock";
-import triviaRepository from "../../test-helpers/repository/trivia.repository.mock";
-import userRepositoryMock  from "../../test-helpers/repository/user.repository.mock";
-import { TriviaRoute } from "../../routes/trivia.route";
-import { ConfigService } from "../../services/config.service";
-import { AuthHandler } from "../auth.handler";
-import { CryptoHandler } from "../crypto.handler";
-import { QuestionCategoryHandler } from "../questionCategory.handler";
-import { ServerHandler } from "../server.handler";
-import { TriviaHandler } from "../trivia.handler";
-import httpUtilsHandler from "../../test-helpers/handler/http-utils-handler.mock";
-
+import serverHandler from "../../test-helpers/handler/server.handler.mock";
 const request = require('supertest');
 
-const configService = new ConfigService();
-const cryptoHandler = new CryptoHandler({
-    configService
-});
-const authHandler = new AuthHandler({
-    userRepository: userRepositoryMock,
-    httpUtilsHandler: httpUtilsHandler,
-});
-const triviaHandler = new TriviaHandler({
-    triviaRepository,
-    httpUtilsHandler,
-    cryptoHandler
-});
-const questionCategoryHandler = new QuestionCategoryHandler({
-    questionCategoryRepository: questionCategoryRepository,
-    httpUtilsHandler: httpUtilsHandler,
-    cryptoHandler
-});
-
-const triviaRoute = new TriviaRoute({ triviaHandler, httpUtilsHandler });
-
-const serverHandler = new ServerHandler({
-    authHandler,
-    httpUtilsHandler,
-    questionCategoryHandler,
-    triviaRoute
-});
 const app = serverHandler.createServer();
 describe('Login tests', () => {
     it('Should return 400 bad request No body parameters', () => {
