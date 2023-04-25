@@ -26,7 +26,6 @@ const validateFields = jest.fn((request, response, next) => {
     next();
 });
 const generateJsonWebToken = jest.fn(userId => {
-    console.log(userId);
     if (userId === 'exceptionUserId') {
         throw new Error('Exception on userId');
     }
