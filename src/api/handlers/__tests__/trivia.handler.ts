@@ -36,4 +36,16 @@ describe('Trivia handler create tests', () => {
             expect(response.status).toBe(200);
         });
     });
+    it('Should return 400 Bad Request', () => {
+        return request(app).post('/api/trivia').set(
+            { 'x-token': 'mytokennewuser' }
+        ).then((response: Response) => {
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    errors: expect.any(Object),
+                })
+            ),
+            expect(response.status).toBe(400);
+        });
+    });
 });
