@@ -3,8 +3,16 @@ import { TriviaRepositoryInterface } from "../../interfaces/repository/trivia.re
 const create = jest.fn(triviaModel => {
     return [];
 });
-const search = jest.fn(triviaModel => {
-    return [];
+const search = jest.fn(idUser => {
+
+    if (idUser === 'validUserIdWithOutTrivia') {
+        return null;
+    }
+    return {
+        idTrivia: 1,
+        idUser: idUser,
+        idQuestionCategory: 1
+    };
 });
 const addQuestionsToTrivia = jest.fn(triviaModel => {
     return [];
