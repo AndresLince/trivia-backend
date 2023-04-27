@@ -1,5 +1,6 @@
 import { HttpUtilsHandlerInterface } from "../../interfaces/handler/http.handler.interface";
 import { validationResult } from 'express-validator';
+import { Response } from 'express';
 
 const validateJsonWebToken = jest.fn((request, response, next) => {
     const token = request.header('x-token');
@@ -35,8 +36,10 @@ const generateJsonWebToken = jest.fn(userId => {
     }
     return '';
 });
-const sendBasicJsonResponse = jest.fn(token => {
-    return [];
+const sendBasicJsonResponse = jest.fn((res: Response, status: number, message: string ) => {
+    return res.status(status).json({
+        message: message,
+    });
 });
 const httpUtilsHandler: HttpUtilsHandlerInterface = {
     validateJsonWebToken,
