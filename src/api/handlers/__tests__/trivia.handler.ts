@@ -21,4 +21,19 @@ describe('Trivia handler create tests', () => {
             expect(response.status).toBe(200);
         });
     });
+    it('Should return 200 Successful', () => {
+        return request(app).post('/api/trivia').set(
+            { 'x-token': 'mytokenuserwithouttrivia' }
+        ).send(
+            { 'idQuestionCategory': '1'}
+        )
+        .then((response: Response) => {
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    idTrivia: expect.any(String),
+                })
+            ),
+            expect(response.status).toBe(200);
+        });
+    });
 });
