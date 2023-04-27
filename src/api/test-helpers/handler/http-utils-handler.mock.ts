@@ -3,6 +3,7 @@ import { validationResult } from 'express-validator';
 
 const validateJsonWebToken = jest.fn((request, response, next) => {
     const token = request.header('x-token');
+    request.body.userId = 'validUserId';
     if (!token) {
         return response.status(401).json();
     }
@@ -11,6 +12,9 @@ const validateJsonWebToken = jest.fn((request, response, next) => {
     }
     if (token === 'exceptionToken') {
         request.body.userId = 'exceptionUserId';
+    }
+    if (token === 'mytokenuserwithouttrivia') {
+        request.body.userId = 'validUserIdWithOutTrivia';
     }
 
     next();
