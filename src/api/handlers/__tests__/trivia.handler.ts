@@ -36,6 +36,15 @@ describe('Trivia handler create tests', () => {
             expect(response.status).toBe(200);
         });
     });
+    it('Should return 500 Internal server error', () => {
+        return request(app).post('/api/trivia').set(
+            { 'x-token': 'exceptionToken' }
+        ).send(
+            { 'idQuestionCategory': '1'}
+        ).then((response: Response) => {
+            expect(response.status).toBe(500);
+        });
+    });
     it('Should return 400 Bad Request', () => {
         return request(app).post('/api/trivia').set(
             { 'x-token': 'mytokennewuser' }
