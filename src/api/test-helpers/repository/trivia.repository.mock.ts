@@ -6,6 +6,9 @@ const create = jest.fn(triviaModel => {
     }
 });
 const search = jest.fn(idUser => {
+    if (idUser === 'exceptionUserId') {
+        throw new Error('Exception on search');
+    }
 
     if (idUser === 'validUserIdWithOutTrivia') {
         return null;
