@@ -1,7 +1,9 @@
 import { TriviaRepositoryInterface } from "../../interfaces/repository/trivia.repository.interface";
 
 const create = jest.fn(triviaModel => {
-    return [];
+    return {
+        insertId: 1
+    }
 });
 const search = jest.fn(idUser => {
 
