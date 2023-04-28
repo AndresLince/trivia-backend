@@ -26,8 +26,11 @@ const addQuestionsToTrivia = jest.fn(triviaModel => {
 const getQuestion = jest.fn(triviaModel => {
     return [];
 });
-const setSelectedAnswer = jest.fn((selectedAnswerModel: SetSelectedAnswer) => {
-    if (selectedAnswerModel.idTrivia === '') {
+const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion }: SetSelectedAnswer) => {
+    if (idQuestion === '') {
+        throw new Error('Exception on setSelectedAnswer');
+    }
+    if (idTrivia === '') {
         return false;
     }
     return true;
