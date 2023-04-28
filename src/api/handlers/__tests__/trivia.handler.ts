@@ -58,3 +58,39 @@ describe('Trivia handler create tests', () => {
         });
     });
 });
+describe('Trivia handler update answer tests', () => {
+    const serviceRoute = '/api/trivia/answer';
+    it('Should return 401 Unauthorized', () => {
+        return request(app).put(serviceRoute).expect(401);
+    });
+
+    it('Should return 200 Successful', () => {
+        return request(app).put(serviceRoute).set(
+            { 'x-token': 'mytokennewuser' }
+        ).send(
+            { idTrivia: 'f6c2', idQuestion: 'f6c2', idSelectedAnswer: 'f6c2' }
+        ).then((response: Response) => {
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    message: expect.any(String),
+                })
+            ),
+            expect(response.status).toBe(200);
+        });
+    });
+
+    it('Should return 400 Successful', () => {
+        return request(app).put(serviceRoute).set(
+            { 'x-token': 'mytokennewuser' }
+        ).send(
+            { idTrivia: 1, idQuestion: 'f6c2', idSelectedAnswer: 'f6c2' }
+        ).then((response: Response) => {
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    message: expect.any(String),
+                })
+            ),
+            expect(response.status).toBe(404);
+        });
+    });
+});
