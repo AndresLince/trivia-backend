@@ -79,7 +79,7 @@ describe('Trivia handler update answer tests', () => {
         });
     });
 
-    it('Should return 400 Successful', () => {
+    it('Should return 400 Not Found', () => {
         return request(app).put(serviceRoute).set(
             { 'x-token': 'mytokennewuser' }
         ).send(
@@ -91,6 +91,21 @@ describe('Trivia handler update answer tests', () => {
                 })
             ),
             expect(response.status).toBe(404);
+        });
+    });
+
+    it('Should return 500 Internal Server Error', () => {
+        return request(app).put(serviceRoute).set(
+            { 'x-token': 'mytokennewuser' }
+        ).send(
+            { idTrivia: 1, idQuestion: 1, idSelectedAnswer: 'f6c2' }
+        ).then((response: Response) => {
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    message: expect.any(String),
+                })
+            ),
+            expect(response.status).toBe(500);
         });
     });
 });
