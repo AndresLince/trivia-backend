@@ -24,7 +24,10 @@ const search = jest.fn(idUser => {
 const addQuestionsToTrivia = jest.fn(triviaModel => {
     return [];
 });
-const getQuestion = jest.fn(triviaModel => {
+const getQuestion = jest.fn((idTrivia: string) => {
+    if (!idTrivia) {
+        return null;
+    }
     return questionDataMock;
 });
 const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion }: SetSelectedAnswer) => {
