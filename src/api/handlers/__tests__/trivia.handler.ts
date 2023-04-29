@@ -1,3 +1,4 @@
+import { questionDataMock } from "../../test-helpers/data/question.data";
 import serverHandler from "../../test-helpers/handler/server.handler.mock";
 const request = require('supertest');
 
@@ -106,6 +107,26 @@ describe('Trivia handler update answer tests', () => {
                 })
             ),
             expect(response.status).toBe(500);
+        });
+    });
+});
+
+describe('Trivia handler get question tests', () => {
+    const serviceRoute = '/api/trivia/question/f6c2';
+    it('Should return 401 Unauthorized', () => {
+        return request(app).get(serviceRoute).expect(401);
+    });
+
+    it('Should return 200 Successful', () => {
+        return request(app).get(serviceRoute).set(
+            { 'x-token': 'mytokennewuser' }
+        ).then((response: Response) => {
+            expect(response.body).toStrictEqual(
+                {
+                    data: questionDataMock
+                }
+            )
+            expect(response.status).toBe(200);
         });
     });
 });
