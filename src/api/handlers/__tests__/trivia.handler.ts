@@ -80,7 +80,7 @@ describe('Trivia handler update answer tests', () => {
         });
     });
 
-    it('Should return 400 Not Found', () => {
+    it('Should return 404 Not Found', () => {
         return request(app).put(serviceRoute).set(
             { 'x-token': 'mytokennewuser' }
         ).send(
