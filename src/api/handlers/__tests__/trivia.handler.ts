@@ -112,13 +112,15 @@ describe('Trivia handler update answer tests', () => {
 });
 
 describe('Trivia handler get question tests', () => {
-    const serviceRoute = '/api/trivia/question/f6c2';
+    const validIdTrivia = 'f6c2';
+    const invalidIdTrivia = '1';
+    const serviceRoute = '/api/trivia/question/';
     it('Should return 401 Unauthorized', () => {
-        return request(app).get(serviceRoute).expect(401);
+        return request(app).get(serviceRoute + validIdTrivia).expect(401);
     });
 
     it('Should return 200 Successful', () => {
-        return request(app).get(serviceRoute).set(
+        return request(app).get(serviceRoute + validIdTrivia).set(
             { 'x-token': 'mytokennewuser' }
         ).then((response: Response) => {
             expect(response.body).toStrictEqual(
@@ -127,6 +129,19 @@ describe('Trivia handler get question tests', () => {
                 }
             )
             expect(response.status).toBe(200);
+        });
+    });
+
+    it('Should return 404 Not Found', () => {
+        return request(app).get(serviceRoute + invalidIdTrivia).set(
+            { 'x-token': 'mytokenuserwithouttrivia' }
+        ).then((response: Response) => {
+            expect(response.body).toStrictEqual(
+                {
+                    data: {}
+                }
+            )
+            expect(response.status).toBe(404);
         });
     });
 });
