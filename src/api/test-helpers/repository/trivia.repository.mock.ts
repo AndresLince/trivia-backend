@@ -1,5 +1,6 @@
 import { SetSelectedAnswer } from "../../interfaces/model/set-selected-answer.model";
 import { TriviaRepositoryInterface } from "../../interfaces/repository/trivia.repository.interface";
+import { questionDataMock } from "../data/question.data";
 
 const create = jest.fn(triviaModel => {
     return {
@@ -24,7 +25,7 @@ const addQuestionsToTrivia = jest.fn(triviaModel => {
     return [];
 });
 const getQuestion = jest.fn(triviaModel => {
-    return [];
+    return questionDataMock;
 });
 const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion }: SetSelectedAnswer) => {
     if (idQuestion === '') {
