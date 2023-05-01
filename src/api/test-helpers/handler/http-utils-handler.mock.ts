@@ -17,6 +17,9 @@ const validateJsonWebToken = jest.fn((request, response, next) => {
     if (token === 'mytokenuserwithouttrivia') {
         request.body.userId = 'validUserIdWithOutTrivia';
     }
+    if (token === 'tokenInvalidCloseTrivia') {
+        request.body.userId = 'invalidUserCloseTrivia';
+    }
 
     next();
 });
