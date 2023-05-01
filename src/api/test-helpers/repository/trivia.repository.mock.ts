@@ -17,7 +17,7 @@ const search = jest.fn(idUser => {
         return null;
     }
     return {
-        idTrivia: 1,
+        idTrivia: 12,
         idUser: idUser,
         idQuestionCategory: 1
     };
@@ -46,7 +46,10 @@ const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion }: SetSelectedAnswer) 
 const getScore = jest.fn(triviaModel => {
     return 100;
 });
-const closeTrivia = jest.fn(triviaModel => {
+const closeTrivia = jest.fn((idTrivia, userId) => {
+    if (userId === 'invalidUserCloseTrivia') {
+        return false;
+    }
     return true;
 });
 const getUserScore = jest.fn(triviaModel => {
