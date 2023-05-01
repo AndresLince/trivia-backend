@@ -28,6 +28,9 @@ const getQuestion = jest.fn((idTrivia: string) => {
     if (!idTrivia) {
         return null;
     }
+    if (idTrivia === '1') {
+        throw new Error('Exception on getQuestion');
+    }
     return questionDataMock;
 });
 const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion }: SetSelectedAnswer) => {
