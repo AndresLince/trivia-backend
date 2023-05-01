@@ -1,4 +1,5 @@
 import { questionDataMock } from "../../test-helpers/data/question.data";
+import { userScoresMock } from "../../test-helpers/data/userScores.data";
 import serverHandler from "../../test-helpers/handler/server.handler.mock";
 const request = require('supertest');
 
@@ -165,5 +166,19 @@ describe('Trivia handler get summary tests', () => {
     const serviceRoute = '/api/trivia/summary/';
     it('Should return 401 Unauthorized', () => {
         return request(app).get(serviceRoute + validIdTrivia).expect(401);
+    });
+
+    it('Should return 200 Successful', () => {
+        return request(app).get(serviceRoute + validIdTrivia).set(
+            { 'x-token': 'mytokennewuser' }
+        ).then((response: Response) => {
+            expect(response.body).toStrictEqual(
+                {
+                    score: 100,
+                    scores: userScoresMock
+                }
+            )
+            expect(response.status).toBe(200);
+        });
     });
 });
