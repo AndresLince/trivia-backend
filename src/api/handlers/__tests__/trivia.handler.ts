@@ -181,4 +181,17 @@ describe('Trivia handler get summary tests', () => {
             expect(response.status).toBe(200);
         });
     });
+
+    it('Should return 400 Bad Request', () => {
+        return request(app).get(serviceRoute + validIdTrivia).set(
+            { 'x-token': 'tokenInvalidCloseTrivia' }
+        ).then((response: Response) => {
+            expect(response.body).toStrictEqual(
+                {
+                    message: 'Error al cerrar la trivia'
+                }
+            )
+            expect(response.status).toBe(400);
+        });
+    });
 });
