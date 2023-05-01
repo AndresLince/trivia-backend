@@ -114,6 +114,7 @@ describe('Trivia handler update answer tests', () => {
 describe('Trivia handler get question tests', () => {
     const validIdTrivia = 'f6c2';
     const invalidIdTrivia = '1';
+    const exceptionIdTrivia = 'f6';
     const serviceRoute = '/api/trivia/question/';
     it('Should return 401 Unauthorized', () => {
         return request(app).get(serviceRoute + validIdTrivia).expect(401);
@@ -142,6 +143,19 @@ describe('Trivia handler get question tests', () => {
                 }
             )
             expect(response.status).toBe(404);
+        });
+    });
+
+    it('Should return 500 Internal Server Error', () => {
+        return request(app).get(serviceRoute + exceptionIdTrivia).set(
+            { 'x-token': 'mytokennewuser' }
+        ).then((response: Response) => {
+            expect(response.body).toEqual(
+                expect.objectContaining({
+
+                })
+            ),
+            expect(response.status).toBe(500);
         });
     });
 });
