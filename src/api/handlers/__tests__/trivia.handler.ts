@@ -159,3 +159,11 @@ describe('Trivia handler get question tests', () => {
         });
     });
 });
+
+describe('Trivia handler get summary tests', () => {
+    const validIdTrivia = 'f6c2';
+    const serviceRoute = '/api/trivia/summary/';
+    it('Should return 401 Unauthorized', () => {
+        return request(app).get(serviceRoute + validIdTrivia).expect(401);
+    });
+});
