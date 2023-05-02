@@ -43,7 +43,10 @@ const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion }: SetSelectedAnswer) 
     }
     return true;
 });
-const getScore = jest.fn(triviaModel => {
+const getScore = jest.fn(idTrivia => {
+    if (idTrivia === '') {
+        return null;
+    }
     return 100;
 });
 const closeTrivia = jest.fn((idTrivia, userId) => {
