@@ -50,6 +50,9 @@ const closeTrivia = jest.fn((idTrivia, userId) => {
     if (userId === 'invalidUserCloseTrivia') {
         return false;
     }
+    if (userId === 'exceptionUserId') {
+        throw new Error('Exception on closeTrivia');
+    }
     return true;
 });
 const getUserScore = jest.fn(triviaModel => {
