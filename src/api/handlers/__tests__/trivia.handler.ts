@@ -194,4 +194,17 @@ describe('Trivia handler get summary tests', () => {
             expect(response.status).toBe(400);
         });
     });
+
+    it('Should return 500 Internal Server Error', () => {
+        return request(app).get(serviceRoute + validIdTrivia).set(
+            { 'x-token': 'exceptionToken' }
+        ).then((response: Response) => {
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    message: 'Error interno por favor intenta nuevamente'
+                })
+            ),
+            expect(response.status).toBe(500);
+        });
+    });
 });
