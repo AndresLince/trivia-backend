@@ -164,6 +164,7 @@ describe('Trivia handler get question tests', () => {
 describe('Trivia handler get summary tests', () => {
     const validIdTrivia = 'f6c2';
     const serviceRoute = '/api/trivia/summary/';
+    const invalidIdTrivia = '1';
     it('Should return 401 Unauthorized', () => {
         return request(app).get(serviceRoute + validIdTrivia).expect(401);
     });
@@ -205,6 +206,19 @@ describe('Trivia handler get summary tests', () => {
                 })
             ),
             expect(response.status).toBe(500);
+        });
+    });
+
+    it('Should return 400 Bad Request', () => {
+        return request(app).get(serviceRoute + invalidIdTrivia).set(
+            { 'x-token': 'mytokenuserwithouttrivia' }
+        ).then((response: Response) => {
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    message: expect.any(String),
+                })
+            )
+            expect(response.status).toBe(400);
         });
     });
 });
