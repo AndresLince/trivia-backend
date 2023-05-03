@@ -1,6 +1,5 @@
 export interface InsertModel {
-    username: string;
-    ip: string;
+    insertId: string;
 }
 
 export interface UserModel {
