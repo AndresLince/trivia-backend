@@ -1,7 +1,9 @@
+import { CreateUserModel } from "../createUser.model";
+import { InsertModel } from "../crud.responses.interface";
 import { DatabaseHandlerInterface } from "../database.handler";
 
 export interface UserRepositoryInterface {
-    createUser: Function;
+    createUser(createUserModel: CreateUserModel): Promise<InsertModel>;
     searchUserByName: Function;
 }
 
