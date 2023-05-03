@@ -1,3 +1,5 @@
+import { CreateUserModel } from "../../interfaces/createUser.model";
+import { InsertModel } from "../../interfaces/crud.responses.interface";
 import { UserRepositoryInterface } from "../../interfaces/repository/user.repository.interface";
 
 const searchUserByName = jest.fn(userModel => {
@@ -18,8 +20,11 @@ const searchUserByName = jest.fn(userModel => {
     }
     return user;
 });
-const createUser = jest.fn(userModel => {
-    return [];
+const createUser = jest.fn((createUserModel: CreateUserModel) => {
+    const insertModel: InsertModel = {
+        insertId: 'insertId'
+    };
+    return Promise.resolve(insertModel)
 });
 const userRepositoryMock: UserRepositoryInterface = {
     searchUserByName,
