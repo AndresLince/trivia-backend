@@ -1,24 +1,24 @@
 import { CreateUserModel } from "../../interfaces/createUser.model";
-import { InsertModel } from "../../interfaces/crud.responses.interface";
+import { InsertModel, UserModel } from "../../interfaces/crud.responses.interface";
 import { UserRepositoryInterface } from "../../interfaces/repository/user.repository.interface";
 
-const searchUserByName = jest.fn(userModel => {
-    const user = {
-        userName: userModel.userName,
-        ip: userModel.ip,
+const searchUserByName = jest.fn(({ userName, ip }: CreateUserModel) => {
+    const user: UserModel = {
+        userName: userName,
+        ip: ip,
         state: 1,
         idUser: 1
     };
-    if (userModel.userName === 'userNameDifferentIp') {
+    if (userName === 'userNameDifferentIp') {
         user.ip = '192.168.0.1';
     }
-    if (userModel.userName === 'newUserName') {
-        return null;
+    if (userName === 'newUserName') {
+        return Promise.resolve(null);
     }
-    if (userModel.userName === 'exceptionUserName') {
+    if (userName === 'exceptionUserName') {
         throw new Error('Exception on userName');
     }
-    return user;
+    return Promise.resolve(user);
 });
 const createUser = jest.fn((createUserModel: CreateUserModel) => {
     const insertModel: InsertModel = {
