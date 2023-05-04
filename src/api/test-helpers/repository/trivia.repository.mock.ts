@@ -1,12 +1,15 @@
+import { InsertModel } from "../../interfaces/crud.responses.interface";
+import { CreateTrivia } from "../../interfaces/model/create-trivia.model";
 import { SetSelectedAnswer } from "../../interfaces/model/set-selected-answer.model";
 import { TriviaRepositoryInterface } from "../../interfaces/repository/trivia.repository.interface";
 import { questionDataMock } from "../data/question.data";
 import { userScoresMock } from "../data/userScores.data";
 
-const create = jest.fn(triviaModel => {
-    return {
-        insertId: 1
-    }
+const create = jest.fn(({ idUser, idQuestionCategory }: CreateTrivia) => {
+    const inserModel: InsertModel = {
+        insertId: '1'
+    };
+    return Promise.resolve(inserModel);
 });
 const search = jest.fn(idUser => {
     if (idUser === 'exceptionUserId') {
