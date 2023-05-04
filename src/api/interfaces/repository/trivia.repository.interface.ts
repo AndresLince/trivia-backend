@@ -1,7 +1,9 @@
+import { InsertModel } from "../crud.responses.interface";
 import { DatabaseHandlerInterface } from "../database.handler";
+import { CreateTrivia } from "../model/create-trivia.model";
 
 export interface TriviaRepositoryInterface {
-    create: Function;
+    create(createTrivia: CreateTrivia): Promise<InsertModel>;
     addQuestionsToTrivia: Function;
     search: Function;
     getQuestion: Function;
