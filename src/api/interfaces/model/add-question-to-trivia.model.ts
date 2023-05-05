@@ -1,4 +1,4 @@
 export interface AddQuestionsToTrivia {
-    idTrivia: number;
+    idTrivia: string;
     idQuestionCategory: number;
 }
