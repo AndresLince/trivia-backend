@@ -10,6 +10,9 @@
     "lint": "eslint . --ext .ts --fix",
     "test": "jest --coverage"
   },
+  "engines": {
+    "node": "16.15.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
