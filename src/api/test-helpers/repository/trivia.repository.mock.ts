@@ -2,6 +2,7 @@ import { InsertModel } from "../../interfaces/crud.responses.interface";
 import { AddQuestionsToTrivia } from "../../interfaces/model/add-question-to-trivia.model";
 import { CreateTrivia } from "../../interfaces/model/create-trivia.model";
 import { SetSelectedAnswer } from "../../interfaces/model/set-selected-answer.model";
+import { TriviaModel } from "../../interfaces/model/trivia.model";
 import { TriviaRepositoryInterface } from "../../interfaces/repository/trivia.repository.interface";
 import { questionDataMock } from "../data/question.data";
 import { userScoresMock } from "../data/userScores.data";
@@ -12,19 +13,20 @@ const create = jest.fn(({ idUser, idQuestionCategory }: CreateTrivia) => {
     };
     return Promise.resolve(inserModel);
 });
-const search = jest.fn(idUser => {
+const search = jest.fn((idUser: string) => {
     if (idUser === 'exceptionUserId') {
         throw new Error('Exception on search');
     }
 
     if (idUser === 'validUserIdWithOutTrivia') {
-        return null;
+        return Promise.resolve(null);
     }
-    return {
-        idTrivia: 12,
+    const triviaModel: TriviaModel = {
+        idTrivia: '12',
         idUser: idUser,
-        idQuestionCategory: 1
-    };
+        idQuestionCategory: '1'
+    }
+    return Promise.resolve(triviaModel);
 });
 const addQuestionsToTrivia = jest.fn((addQuestionsToTrivia: AddQuestionsToTrivia) => {
     return Promise.resolve(true);
