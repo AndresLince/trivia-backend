@@ -1,4 +1,5 @@
 import { InsertModel } from "../../interfaces/crud.responses.interface";
+import { AddQuestionsToTrivia } from "../../interfaces/model/add-question-to-trivia.model";
 import { CreateTrivia } from "../../interfaces/model/create-trivia.model";
 import { SetSelectedAnswer } from "../../interfaces/model/set-selected-answer.model";
 import { TriviaRepositoryInterface } from "../../interfaces/repository/trivia.repository.interface";
@@ -25,8 +26,8 @@ const search = jest.fn(idUser => {
         idQuestionCategory: 1
     };
 });
-const addQuestionsToTrivia = jest.fn(triviaModel => {
-    return [];
+const addQuestionsToTrivia = jest.fn((addQuestionsToTrivia: AddQuestionsToTrivia) => {
+    return Promise.resolve(true);
 });
 const getQuestion = jest.fn((idTrivia: string) => {
     if (!idTrivia) {
