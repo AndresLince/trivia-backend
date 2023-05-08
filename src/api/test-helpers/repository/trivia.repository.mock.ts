@@ -33,12 +33,12 @@ const addQuestionsToTrivia = jest.fn((addQuestionsToTrivia: AddQuestionsToTrivia
 });
 const getQuestion = jest.fn((idTrivia: string) => {
     if (!idTrivia) {
-        return null;
+        return Promise.resolve(null);
     }
     if (idTrivia === '1') {
         throw new Error('Exception on getQuestion');
     }
-    return questionDataMock;
+    return Promise.resolve(questionDataMock);
 });
 const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion }: SetSelectedAnswer) => {
     if (idQuestion === '') {
