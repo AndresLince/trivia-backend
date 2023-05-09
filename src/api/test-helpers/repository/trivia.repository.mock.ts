@@ -40,14 +40,14 @@ const getQuestion = jest.fn((idTrivia: string) => {
     }
     return Promise.resolve(questionDataMock);
 });
-const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion }: SetSelectedAnswer) => {
+const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion, idSelectedAnswer }: SetSelectedAnswer) => {
     if (idQuestion === '') {
         throw new Error('Exception on setSelectedAnswer');
     }
     if (idTrivia === '') {
-        return false;
+        return Promise.resolve(false);
     }
-    return true;
+    return Promise.resolve(true);
 });
 const getScore = jest.fn(idTrivia => {
     if (idTrivia === '') {
