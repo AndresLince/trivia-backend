@@ -49,11 +49,11 @@ const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion, idSelectedAnswer }: S
     }
     return Promise.resolve(true);
 });
-const getScore = jest.fn(idTrivia => {
+const getScore = jest.fn((idTrivia: string) => {
     if (idTrivia === '') {
-        return null;
+        return Promise.resolve(null);
     }
-    return 100;
+    return Promise.resolve(100);
 });
 const closeTrivia = jest.fn((idTrivia, userId) => {
     if (userId === 'invalidUserCloseTrivia') {
