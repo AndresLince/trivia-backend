@@ -12,7 +12,7 @@ export interface TriviaRepositoryInterface {
     search(idUser: string): Promise<TriviaModel | null>;
     getQuestion(idTrivia: string): Promise<Question | null>;
     setSelectedAnswer({ idTrivia, idQuestion, idSelectedAnswer }: SetSelectedAnswer): Promise<boolean>;
-    getScore: Function;
+    getScore(idTrivia: string): Promise<number | null>;
     closeTrivia: Function;
     getUserScore: Function;
     createUserScore: Function;
