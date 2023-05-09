@@ -55,14 +55,14 @@ const getScore = jest.fn((idTrivia: string) => {
     }
     return Promise.resolve(100);
 });
-const closeTrivia = jest.fn((idTrivia, userId) => {
-    if (userId === 'invalidUserCloseTrivia') {
-        return false;
+const closeTrivia = jest.fn((idUser: string, idTrivia: string) => {
+    if (idUser === 'invalidUserCloseTrivia') {
+        return Promise.resolve(false);
     }
-    if (userId === 'exceptionUserId') {
+    if (idUser === 'exceptionUserId') {
         throw new Error('Exception on closeTrivia');
     }
-    return true;
+    return Promise.resolve(true);
 });
 const getUserScore = jest.fn(() => {
     return userScoresMock;
