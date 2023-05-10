@@ -5,6 +5,7 @@ import { CreateTrivia } from "../model/create-trivia.model";
 import { Question } from "../model/question.model";
 import { SetSelectedAnswer } from "../model/set-selected-answer.model";
 import { TriviaModel } from "../model/trivia.model";
+import { UserScore } from "../model/user-score.model";
 
 export interface TriviaRepositoryInterface {
     create(createTrivia: CreateTrivia): Promise<InsertModel>;
@@ -14,7 +15,7 @@ export interface TriviaRepositoryInterface {
     setSelectedAnswer({ idTrivia, idQuestion, idSelectedAnswer }: SetSelectedAnswer): Promise<boolean>;
     getScore(idTrivia: string): Promise<number | null>;
     closeTrivia(idUser: string, idTrivia: string): Promise<boolean>;
-    getUserScore: Function;
+    getUserScore(): Promise<UserScore[]|null>;
     createUserScore: Function;
 }
 
