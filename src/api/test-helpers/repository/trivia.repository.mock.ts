@@ -55,7 +55,7 @@ const getScore = jest.fn((idTrivia: string) => {
     }
     return Promise.resolve(100);
 });
-const closeTrivia = jest.fn((idUser: string, idTrivia: string) => {
+const closeTrivia = jest.fn((idTrivia: string, idUser: string) => {
     if (idUser === 'invalidUserCloseTrivia') {
         return Promise.resolve(false);
     }
