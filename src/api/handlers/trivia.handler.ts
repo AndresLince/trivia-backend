@@ -130,7 +130,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
                 const { insertId } = await this.triviaRepository.createUserScore(userId, score);
             }
 
-            const userScore = await this.triviaRepository.getUserScore(idTrivia);
+            const userScore = await this.triviaRepository.getUserScore();
             if (userScore !== null) {
                 this.cryptoHandler.encryptFields(userScore, 'idUser');
                 return response.status(200).send({
