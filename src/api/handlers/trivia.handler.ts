@@ -127,7 +127,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
             }
 
             if (trivia && trivia.idTrivia == idTrivia) {
-                const { insertId } = await this.triviaRepository.createUserScore(userId, score);
+                const insertId = await this.triviaRepository.createUserScore(userId, score);
             }
 
             const userScore = await this.triviaRepository.getUserScore();
