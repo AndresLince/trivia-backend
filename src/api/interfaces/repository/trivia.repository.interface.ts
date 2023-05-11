@@ -16,7 +16,7 @@ export interface TriviaRepositoryInterface {
     getScore(idTrivia: string): Promise<number | null>;
     closeTrivia(idTrivia: string, idUser: string): Promise<boolean>;
     getUserScore(): Promise<UserScore[]|null>;
-    createUserScore: Function;
+    createUserScore(idUser: string, score: number): Promise<string | null>;
 }
 
 export interface TriviaConstructorInterface{
