@@ -67,8 +67,8 @@ const closeTrivia = jest.fn((idTrivia: string, idUser: string) => {
 const getUserScore = jest.fn(() => {
     return Promise.resolve(userScoresMock);
 });
-const createUserScore = jest.fn(triviaModel => {
-    return true;
+const createUserScore = jest.fn((idUser: string, score: number) => {
+    return Promise.resolve('1');
 });
 const triviaRepository: TriviaRepositoryInterface = {
     create,
