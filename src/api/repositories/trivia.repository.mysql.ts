@@ -84,30 +84,30 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
         const sql = `call getTriviaScore(?)`;
         const result = await this.databaseHandler.getPool().query(sql, [ idTrivia ]);
 
-        if (result[0].length === 0) {
+        if (result[ 0 ].length === 0) {
             return null;
         }
 
-        return result[0][0].score;
+        return result[ 0 ][ 0 ].score;
     }
 
     async getUserScore(): Promise<UserScore[]|null> {
         const sql = `call getUserScore(?)`;
         const result = await this.databaseHandler.getPool().query(sql, [ 5 ]);
-        if (result[0].length === 0) {
+        if (result[ 0 ].length === 0) {
             return null;
         }
 
-        return result[0];
+        return result[ 0 ];
     }
 
     async createUserScore(idUser: string, score: number): Promise<string|null> {
         const sql = `call createUserScore(?, ?, @last_id)`;
-        await this.databaseHandler.getPool().query(sql, [idUser, score ]);
+        await this.databaseHandler.getPool().query(sql, [ idUser, score ]);
 
         const sql2 = `SELECT @last_id AS insertId`;
         const result = await this.databaseHandler.getPool().query(sql2);
-        return result[0];
+        return result[ 0 ];
     }
 
     async closeTrivia(idTrivia: string, idUser: string): Promise<boolean> {

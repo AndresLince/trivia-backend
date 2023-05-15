@@ -12,7 +12,7 @@ describe('Trivia handler create tests', () => {
         return request(app).post('/api/trivia').set(
             { 'x-token': 'mytokennewuser' }
         ).send(
-            { 'idQuestionCategory': '1'}
+            { 'idQuestionCategory': '1' }
         )
         .then((response: Response) => {
             expect(response.body).toEqual(
@@ -27,7 +27,7 @@ describe('Trivia handler create tests', () => {
         return request(app).post('/api/trivia').set(
             { 'x-token': 'mytokenuserwithouttrivia' }
         ).send(
-            { 'idQuestionCategory': '1'}
+            { 'idQuestionCategory': '1' }
         )
         .then((response: Response) => {
             expect(response.body).toEqual(
@@ -42,7 +42,7 @@ describe('Trivia handler create tests', () => {
         return request(app).post('/api/trivia').set(
             { 'x-token': 'exceptionToken' }
         ).send(
-            { 'idQuestionCategory': '1'}
+            { 'idQuestionCategory': '1' }
         ).then((response: Response) => {
             expect(response.status).toBe(500);
         });
@@ -129,7 +129,7 @@ describe('Trivia handler get question tests', () => {
                 {
                     data: questionDataMock
                 }
-            )
+            );
             expect(response.status).toBe(200);
         });
     });
@@ -142,7 +142,7 @@ describe('Trivia handler get question tests', () => {
                 {
                     data: {}
                 }
-            )
+            );
             expect(response.status).toBe(404);
         });
     });
@@ -178,7 +178,7 @@ describe('Trivia handler get summary tests', () => {
                     score: 100,
                     scores: userScoresMock
                 }
-            )
+            );
             expect(response.status).toBe(200);
         });
     });
@@ -191,7 +191,7 @@ describe('Trivia handler get summary tests', () => {
                 {
                     message: 'Error al cerrar la trivia'
                 }
-            )
+            );
             expect(response.status).toBe(400);
         });
     });
@@ -217,7 +217,7 @@ describe('Trivia handler get summary tests', () => {
                 expect.objectContaining({
                     message: expect.any(String),
                 })
-            )
+            );
             expect(response.status).toBe(400);
         });
     });
