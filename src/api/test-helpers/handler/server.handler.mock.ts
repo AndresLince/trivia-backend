@@ -10,8 +10,6 @@ import { ServerHandler } from "../../handlers/server.handler";
 import { TriviaHandler } from "../../handlers/trivia.handler";
 import httpUtilsHandler from "./http-utils-handler.mock";
 
-const request = require('supertest');
-
 const configService = new ConfigService();
 const cryptoHandler = new CryptoHandler({
     configService

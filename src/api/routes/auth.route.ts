@@ -1,5 +1,3 @@
-import { HttpUtilsHandler } from "../handlers/httpUtilsHandler";
-
 /*
 Route: /api/auth
 */

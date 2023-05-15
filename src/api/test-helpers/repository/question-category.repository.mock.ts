@@ -1,6 +1,6 @@
 import { QuestionCategoryRepositoryInterface } from "../../interfaces/questionCategory.repository.interface";
 
-const searchAll = jest.fn(questionCategoryModel => {
+const searchAll = jest.fn(() => {
    return [
        { idQuestionCategory: 1, name: 'Category 1' },
        { idQuestionCategory: 2, name: 'Category 2' },
