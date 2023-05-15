@@ -25,7 +25,7 @@ const search = jest.fn((idUser: string) => {
         idTrivia: '12',
         idUser: idUser,
         idQuestionCategory: '1'
-    }
+    };
     return Promise.resolve(triviaModel);
 });
 const addQuestionsToTrivia = jest.fn((addQuestionsToTrivia: AddQuestionsToTrivia) => {

@@ -24,7 +24,7 @@ const createUser = jest.fn((createUserModel: CreateUserModel) => {
     const insertModel: InsertModel = {
         insertId: 'insertId'
     };
-    return Promise.resolve(insertModel)
+    return Promise.resolve(insertModel);
 });
 const userRepositoryMock: UserRepositoryInterface = {
     searchUserByName,
