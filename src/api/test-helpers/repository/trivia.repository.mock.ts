@@ -7,7 +7,10 @@ import { TriviaRepositoryInterface } from "../../interfaces/repository/trivia.re
 import { questionDataMock } from "../data/question.data";
 import { userScoresMock } from "../data/userScores.data";
 
-const create = jest.fn(({ idUser, idQuestionCategory }: CreateTrivia) => {
+const create = jest.fn((createTrivia: CreateTrivia) => {
+    if (createTrivia.idUser === 'exceptionUserId') {
+        throw new Error('Exception on create');
+    }
     const inserModel: InsertModel = {
         insertId: '1'
     };
@@ -29,6 +32,9 @@ const search = jest.fn((idUser: string) => {
     return Promise.resolve(triviaModel);
 });
 const addQuestionsToTrivia = jest.fn((addQuestionsToTrivia: AddQuestionsToTrivia) => {
+    if (!addQuestionsToTrivia.idTrivia) {
+        return Promise.resolve(false);
+    }
     return Promise.resolve(true);
 });
 const getQuestion = jest.fn((idTrivia: string) => {
@@ -45,6 +51,9 @@ const setSelectedAnswer = jest.fn(({ idTrivia, idQuestion, idSelectedAnswer }: S
         throw new Error('Exception on setSelectedAnswer');
     }
     if (idTrivia === '') {
+        return Promise.resolve(false);
+    }
+    if (idSelectedAnswer === '') {
         return Promise.resolve(false);
     }
     return Promise.resolve(true);
@@ -68,6 +77,12 @@ const getUserScore = jest.fn(() => {
     return Promise.resolve(userScoresMock);
 });
 const createUserScore = jest.fn((idUser: string, score: number) => {
+    if (idUser === '') {
+        throw new Error('Exception on createUserScore');
+    }
+    if (score === null) {
+        throw new Error('Exception on createUserScore');
+    }
     return Promise.resolve('1');
 });
 const triviaRepository: TriviaRepositoryInterface = {
