@@ -23,10 +23,9 @@ export class UserRepositoryMysql implements UserRepositoryInterface {
         if (result[ 0 ].length === 0) {
             return null;
         }
-        let user: UserModel;
 
         const userDb = result[ 0 ][ 0 ];
-        user = {
+        const user: UserModel = {
             userName: userDb.userName,
             ip: userDb.ip,
             state: userDb.state,

@@ -21,6 +21,9 @@ const searchUserByName = jest.fn(({ userName, ip }: CreateUserModel) => {
     return Promise.resolve(user);
 });
 const createUser = jest.fn((createUserModel: CreateUserModel) => {
+    if (createUserModel.userName === '') {
+        throw new Error('Exception on createUser');
+    }
     const insertModel: InsertModel = {
         insertId: 'insertId'
     };
