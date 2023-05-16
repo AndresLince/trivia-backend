@@ -1,3 +1,3 @@
 export interface ConfigServiceInterface {
-    getConfig: Function;
+    getConfig(key: string): string;
 }

@@ -1,6 +1,7 @@
 import { InsertModel } from '../interfaces/crud.responses.interface';
 import { DatabaseHandlerInterface } from '../interfaces/database.handler';
 import { AddQuestionsToTrivia } from '../interfaces/model/add-question-to-trivia.model';
+import { AnswerDatabase } from '../interfaces/model/answer-database.model';
 import { Answer } from '../interfaces/model/answer.model';
 import { CreateTrivia } from '../interfaces/model/create-trivia.model';
 import { Question } from '../interfaces/model/question.model';
@@ -58,7 +59,7 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
             description: questionDb.questionDescription,
             answers: []
         };
-        result[ 0 ].forEach((element: any) => {
+        result[ 0 ].forEach((element: AnswerDatabase) => {
             const answer: Answer =  {
                 idAnswer: element.idAnswer,
                 description: element.answerDescription
