@@ -34,10 +34,9 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
         if (result[ 0 ].length === 0) {
             return null;
         }
-        let trivia: TriviaModel;
 
         const triviaDb = result[ 0 ][ 0 ];
-        trivia = {
+        const trivia: TriviaModel = {
             idTrivia: triviaDb.idTrivia,
             idUser: triviaDb.idUser,
             idQuestionCategory: triviaDb.idQuestionCategory
@@ -52,10 +51,9 @@ export class TriviaRepositoryMysql implements TriviaRepositoryInterface {
         if (result[ 0 ].length === 0) {
             return null;
         }
-        let question: Question;
 
         const questionDb = result[ 0 ][ 0 ];
-        question = {
+        const question: Question = {
             idQuestion: questionDb.idQuestion,
             description: questionDb.questionDescription,
             answers: []
