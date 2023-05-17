@@ -7,7 +7,7 @@ export class QuestionCategoryRepositoryMysql implements QuestionCategoryReposito
     constructor({ databaseHandler }: RepositoryConstructorInterface) {
         this.databaseHandler = databaseHandler;
     }
-    async searchAll(): Promise<QuestionCategory | null> {
+    async searchAll(): Promise<QuestionCategory[] | null> {
         const sql = `call searchQuestionCategories()`;
         const result = await this.databaseHandler.getPool().query(sql);
 

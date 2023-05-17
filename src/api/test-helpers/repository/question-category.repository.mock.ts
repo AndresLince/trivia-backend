@@ -6,7 +6,7 @@ const searchAll = jest.fn(() => {
         { idQuestionCategory: '1', name: 'Category 1' },
         { idQuestionCategory: '2', name: 'Category 2' },
         { idQuestionCategory: '3', name: 'Category 3' },
-    ]
+    ];
     return Promise.resolve(questionCategory);
 });
 const questionCategoryRepository: QuestionCategoryRepositoryInterface = {
