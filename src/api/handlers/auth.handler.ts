@@ -3,6 +3,7 @@ import { AuthHandlerConstructorInterface, AuthHandlerInterface } from '../interf
 import { CreateUserModel } from '../interfaces/createUser.model';
 import { HttpUtilsHandlerInterface } from '../interfaces/handler/http.handler.interface';
 import { UserRepositoryInterface } from '../interfaces/repository/user.repository.interface';
+import { USER_MESSAGES } from '../interfaces/messages/user-messages';
 
 export class AuthHandler implements AuthHandlerInterface {
     private userRepository: UserRepositoryInterface;
@@ -31,7 +32,7 @@ export class AuthHandler implements AuthHandlerInterface {
                 //Crear token
                 const token = await this.httpUtilsHandler.generateJsonWebToken(user.idUser);
                 return response.status(200).send({
-                    message: "Usuario creado correctamente",
+                    message: USER_MESSAGES.USER_CREATED,
                     token
                 });
             }
@@ -40,7 +41,7 @@ export class AuthHandler implements AuthHandlerInterface {
             const token = await this.httpUtilsHandler.generateJsonWebToken(insertId);
 
             return response.status(200).send({
-                message: "Usuario creado correctamente",
+                message: USER_MESSAGES.USER_CREATED,
                 token
             });
         } catch (error) {
