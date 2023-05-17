@@ -3,21 +3,18 @@ const request = require('supertest');
 
 const app = serverHandler.createServer();
 describe('Login tests', () => {
-    it('Should return 400 bad request No body parameters', () => {
-        return request(app).post('/api/auth/signup').expect(400);
+    it('Should return 400 bad request No body parameters', async () => {
+        const response = await request(app).post('/api/auth/signup');
+
+        expect(response.statusCode).toEqual(400);
     });
-    it('Should return 200 successful login', () => {
-        return request(app).post('/api/auth/signup')
-            .send(
-                { 'userName': 'userName', 'ip': '116.117.12.15' }
-            ).then((response: Response) => {
-                expect(response.body).toEqual(
-                    expect.objectContaining({
-                        token: expect.any(String),
-                    })
-                ),
-                expect(response.status).toBe(200);
-            });
+    it('Should return 200 successful login', async() => {
+        const response = await request(app).post('/api/auth/signup').send(
+            { 'userName': 'userName', 'ip': '116.117.12.15' }
+        );
+
+        expect(response.body).toStrictEqual({ message: 'Usuario creado correctamente', token: '' });
+        expect(response.status).toBe(200);
     });
     it('Should return 400 user already exist with that name and another Ip', () => {
         return request(app).post('/api/auth/signup')
