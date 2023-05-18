@@ -5,23 +5,24 @@ const request = require('supertest');
 
 const app = serverHandler.createServer();
 describe('Trivia handler create tests', () => {
-    it('Should return 401 Unauthorized', () => {
-        return request(app).post('/api/trivia').expect(401);
+    it('Should return 401 Unauthorized', async() => {
+        const response = await request(app).post('/api/trivia');
+
+        expect(response.status).toBe(401);
     });
-    it('Should return 200 Successful', () => {
-        return request(app).post('/api/trivia').set(
+    it('Should return 200 Successful', async() => {
+        const response = await request(app).post('/api/trivia').set(
             { 'x-token': 'mytokennewuser' }
         ).send(
             { 'idQuestionCategory': '1' }
-        )
-        .then((response: Response) => {
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    idTrivia: expect.any(String),
-                })
-            ),
-            expect(response.status).toBe(200);
-        });
+        );
+
+        expect(response.body).toStrictEqual(
+            expect.objectContaining({
+                idTrivia: expect.any(String),
+            })
+        );
+        expect(response.status).toBe(200);
     });
     it('Should return 200 Successful', () => {
         return request(app).post('/api/trivia').set(
