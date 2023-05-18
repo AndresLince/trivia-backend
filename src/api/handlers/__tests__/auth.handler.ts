@@ -61,11 +61,11 @@ describe('renew json web token', () => {
 
         expect(response.status).toBe(401);
     });
-    it('Should return 500 Internal server error', () => {
-        return request(app).get('/api/auth/renew').set(
+    it('Should return 500 Internal server error', async() => {
+        const response = await request(app).get('/api/auth/renew').set(
             { 'x-token': 'exceptionToken' }
-        ).then((response: Response) => {
-            expect(response.status).toBe(500);
-        });
+        );
+
+        expect(response.status).toBe(500);
     });
 });
