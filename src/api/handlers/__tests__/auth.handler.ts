@@ -1,3 +1,4 @@
+import { USER_MESSAGES } from "../../interfaces/messages/user-messages";
 import serverHandler from "../../test-helpers/handler/server.handler.mock";
 const request = require('supertest');
 
@@ -13,58 +14,52 @@ describe('Login tests', () => {
             { 'userName': 'userName', 'ip': '116.117.12.15' }
         );
 
-        expect(response.body).toStrictEqual({ message: 'Usuario creado correctamente', token: '' });
+        expect(response.body).toStrictEqual({ message: USER_MESSAGES.USER_CREATED, token: '' });
         expect(response.status).toBe(200);
     });
-    it('Should return 400 user already exist with that name and another Ip', () => {
-        return request(app).post('/api/auth/signup')
-            .send(
-                { 'userName': 'userNameDifferentIp', 'ip': '116.117.12.15' }
-            ).expect(400);
+    it('Should return 400 user already exist with that name and another Ip', async() => {
+        const response = await request(app).post('/api/auth/signup').send(
+            { 'userName': 'userNameDifferentIp', 'ip': '116.117.12.15' }
+        );
+
+        expect(response.status).toBe(400);
     });
-    it('Should return 200 successful login', () => {
-        return request(app).post('/api/auth/signup')
-            .send(
-                { 'userName': 'newUserName', 'ip': '116.117.12.15' }
-            ).then((response: Response) => {
-                expect(response.body).toEqual(
-                    expect.objectContaining({
-                        token: expect.any(String),
-                    })
-                );
-            });
+    it('Should return 200 successful login with a new user name', async() => {
+        const response = await request(app).post('/api/auth/signup').send(
+            { 'userName': 'newUserName', 'ip': '116.117.12.15' }
+        );
+
+        expect(response.body).toStrictEqual({ message: USER_MESSAGES.USER_CREATED, token: '' });
+        expect(response.status).toBe(200);
     });
-    it('Should return 500 Internal server error', () => {
-        return request(app).post('/api/auth/signup')
-            .send(
-                { 'userName': 'exceptionUserName', 'ip': '116.117.12.15' }
-            ).then((response: Response) => {
-                expect(response.status).toBe(500);
-            });
+    it('Should return 500 Internal server error', async() => {
+        const response = await request(app).post('/api/auth/signup').send(
+            { 'userName': 'exceptionUserName', 'ip': '116.117.12.15' }
+        );
+
+        expect(response.status).toBe(500);
     });
 });
 describe('renew json web token', () => {
-    it('Should return 401 Unauthorized', () => {
-        return request(app).get('/api/auth/renew').expect(401);
+    it('Should return 401 Unauthorized', async() => {
+        const response = await request(app).get('/api/auth/renew');
+
+        expect(response.status).toBe(401);
     });
-    it('Should return 200 successful renew token', () => {
-        return request(app).get('/api/auth/renew').set(
+    it('Should return 200 successful renew token', async() => {
+        const response = await request(app).get('/api/auth/renew').set(
             { 'x-token': 'mytokennewuser' }
-        ).then((response: Response) => {
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    token: expect.any(String),
-                })
-            ),
-            expect(response.status).toBe(200);
-        });
+        );
+
+        expect(response.body).toStrictEqual({ token: '' });
+        expect(response.status).toBe(200);
     });
-    it('Should return 401 Unauthorized', () => {
-        return request(app).get('/api/auth/renew').set(
+    it('Should return 401 Unauthorized', async() => {
+        const response = await request(app).get('/api/auth/renew').set(
             { 'x-token': 'invalidToken' }
-        ).then((response: Response) => {
-            expect(response.status).toBe(401);
-        });
+        )
+
+        expect(response.status).toBe(401);
     });
     it('Should return 500 Internal server error', () => {
         return request(app).get('/api/auth/renew').set(
