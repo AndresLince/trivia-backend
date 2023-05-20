@@ -98,19 +98,19 @@ describe('Trivia handler update answer tests', () => {
         expect(response.status).toBe(404);
     });
 
-    it('Should return 500 Internal Server Error', () => {
-        return request(app).put(serviceRoute).set(
+    it('Should return 500 Internal Server Error', async() => {
+        const response = await request(app).put(serviceRoute).set(
             { 'x-token': 'mytokennewuser' }
         ).send(
             { idTrivia: 1, idQuestion: 1, idSelectedAnswer: 'f6c2' }
-        ).then((response: Response) => {
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    message: expect.any(String),
-                })
-            ),
-            expect(response.status).toBe(500);
-        });
+        );
+
+        expect(response.body).toEqual(
+            expect.objectContaining({
+                message: expect.any(String),
+            })
+        );
+        expect(response.status).toBe(500);
     });
 });
 
@@ -119,8 +119,10 @@ describe('Trivia handler get question tests', () => {
     const invalidIdTrivia = '1';
     const exceptionIdTrivia = 'f6';
     const serviceRoute = '/api/trivia/question/';
-    it('Should return 401 Unauthorized', () => {
-        return request(app).get(serviceRoute + validIdTrivia).expect(401);
+    it('Should return 401 Unauthorized', async() => {
+        const response = await request(app).get(serviceRoute + validIdTrivia);
+
+        expect(response.status).toBe(401);
     });
 
     it('Should return 200 Successful', () => {
