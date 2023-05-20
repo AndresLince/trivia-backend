@@ -3,19 +3,20 @@ const request = require('supertest');
 
 const app = serverHandler.createServer();
 describe('Get Question category handler tests', () => {
-    it('Should return 401 Unauthorized', () => {
-        return request(app).get('/api/question-category').expect(401);
+    it('Should return 401 Unauthorized', async() => {
+        const response = await request(app).get('/api/question-category');
+
+        expect(response.status).toBe(401);
     });
-    it('Should return 200 Successful', () => {
-        return request(app).get('/api/question-category').set(
+    it('Should return 200 Successful', async() => {
+        const response = await request(app).get('/api/question-category').set(
             { 'x-token': 'mytokennewuser' }
-        ).then((response: Response) => {
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    data: expect.any(Array),
-                })
-            ),
-            expect(response.status).toBe(200);
-        });
+        )
+        expect(response.body).toEqual(
+            expect.objectContaining({
+                data: expect.any(Array),
+            })
+        ),
+        expect(response.status).toBe(200);
     });
 });
