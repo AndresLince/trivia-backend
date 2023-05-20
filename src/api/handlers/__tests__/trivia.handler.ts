@@ -68,34 +68,34 @@ describe('Trivia handler update answer tests', () => {
         expect(response.status).toBe(401);
     });
 
-    it('Should return 200 Successful', () => {
-        return request(app).put(serviceRoute).set(
+    it('Should return 200 Successful', async() => {
+        const response = await request(app).put(serviceRoute).set(
             { 'x-token': 'mytokennewuser' }
         ).send(
             { idTrivia: 'f6c2', idQuestion: 'f6c2', idSelectedAnswer: 'f6c2' }
-        ).then((response: Response) => {
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    message: expect.any(String),
-                })
-            ),
-            expect(response.status).toBe(200);
-        });
+        );
+
+        expect(response.body).toEqual(
+            expect.objectContaining({
+                message: expect.any(String),
+            })
+        ),
+        expect(response.status).toBe(200);
     });
 
-    it('Should return 404 Not Found', () => {
-        return request(app).put(serviceRoute).set(
+    it('Should return 404 Not Found', async() => {
+        const response = await request(app).put(serviceRoute).set(
             { 'x-token': 'mytokennewuser' }
         ).send(
             { idTrivia: 1, idQuestion: 'f6c2', idSelectedAnswer: 'f6c2' }
-        ).then((response: Response) => {
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    message: expect.any(String),
-                })
-            ),
-            expect(response.status).toBe(404);
-        });
+        );
+
+        expect(response.body).toEqual(
+            expect.objectContaining({
+                message: expect.any(String),
+            })
+        );
+        expect(response.status).toBe(404);
     });
 
     it('Should return 500 Internal Server Error', () => {
