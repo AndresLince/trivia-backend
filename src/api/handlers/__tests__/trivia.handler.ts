@@ -1,7 +1,7 @@
 import { questionDataMock } from "../../test-helpers/data/question.data";
 import { userScoresMock } from "../../test-helpers/data/userScores.data";
 import serverHandler from "../../test-helpers/handler/server.handler.mock";
-const request = require('supertest');
+import request from 'supertest';
 
 const app = serverHandler.createServer();
 describe('Trivia handler create tests', () => {
