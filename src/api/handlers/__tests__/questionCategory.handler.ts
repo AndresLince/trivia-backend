@@ -1,5 +1,5 @@
 import serverHandler from "../../test-helpers/handler/server.handler.mock";
-const request = require('supertest');
+import request from 'supertest';
 
 const app = serverHandler.createServer();
 describe('Get Question category handler tests', () => {
