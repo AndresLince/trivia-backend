@@ -169,22 +169,23 @@ describe('Trivia handler get summary tests', () => {
     const validIdTrivia = 'f6c2';
     const serviceRoute = '/api/trivia/summary/';
     const invalidIdTrivia = '1';
-    it('Should return 401 Unauthorized', () => {
-        return request(app).get(serviceRoute + validIdTrivia).expect(401);
+    it('Should return 401 Unauthorized', async() => {
+        const response = await request(app).get(serviceRoute + validIdTrivia);
+
+        expect(response.status).toBe(401);
     });
 
-    it('Should return 200 Successful', () => {
-        return request(app).get(serviceRoute + validIdTrivia).set(
+    it('Should return 200 Successful', async() => {
+        const response = await request(app).get(serviceRoute + validIdTrivia).set(
             { 'x-token': 'mytokennewuser' }
-        ).then((response: Response) => {
-            expect(response.body).toStrictEqual(
-                {
-                    score: 100,
-                    scores: userScoresMock
-                }
-            );
-            expect(response.status).toBe(200);
-        });
+        );
+        expect(response.body).toStrictEqual(
+            {
+                score: 100,
+                scores: userScoresMock
+            }
+        );
+        expect(response.status).toBe(200);
     });
 
     it('Should return 400 Bad Request', () => {
