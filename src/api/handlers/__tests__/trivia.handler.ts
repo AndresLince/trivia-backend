@@ -188,42 +188,40 @@ describe('Trivia handler get summary tests', () => {
         expect(response.status).toBe(200);
     });
 
-    it('Should return 400 Bad Request', () => {
-        return request(app).get(serviceRoute + validIdTrivia).set(
+    it('Should return 400 Bad Request', async() => {
+        const response = await request(app).get(serviceRoute + validIdTrivia).set(
             { 'x-token': 'tokenInvalidCloseTrivia' }
-        ).then((response: Response) => {
-            expect(response.body).toStrictEqual(
-                {
-                    message: 'Error al cerrar la trivia'
-                }
-            );
-            expect(response.status).toBe(400);
-        });
+        );
+
+        expect(response.body).toStrictEqual(
+            {
+                message: 'Error al cerrar la trivia'
+            }
+        );
+        expect(response.status).toBe(400);
     });
 
-    it('Should return 500 Internal Server Error', () => {
-        return request(app).get(serviceRoute + validIdTrivia).set(
+    it('Should return 500 Internal Server Error', async() => {
+        const response = await request(app).get(serviceRoute + validIdTrivia).set(
             { 'x-token': 'exceptionToken' }
-        ).then((response: Response) => {
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    message: 'Error interno por favor intenta nuevamente'
-                })
-            ),
-            expect(response.status).toBe(500);
-        });
+        );
+        expect(response.body).toEqual(
+            expect.objectContaining({
+                message: 'Error interno por favor intenta nuevamente'
+            })
+        ),
+        expect(response.status).toBe(500);
     });
 
-    it('Should return 400 Bad Request', () => {
-        return request(app).get(serviceRoute + invalidIdTrivia).set(
+    it('Should return 400 Bad Request', async() => {
+        const response = await request(app).get(serviceRoute + invalidIdTrivia).set(
             { 'x-token': 'mytokenuserwithouttrivia' }
-        ).then((response: Response) => {
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    message: expect.any(String),
-                })
-            );
-            expect(response.status).toBe(400);
-        });
+        );
+        expect(response.body).toEqual(
+            expect.objectContaining({
+                message: expect.any(String),
+            })
+        );
+        expect(response.status).toBe(400);
     });
 });
