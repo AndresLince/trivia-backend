@@ -57,7 +57,7 @@ describe('renew json web token', () => {
     it('Should return 401 Unauthorized', async() => {
         const response = await request(app).get('/api/auth/renew').set(
             { 'x-token': 'invalidToken' }
-        )
+        );
 
         expect(response.status).toBe(401);
     });
