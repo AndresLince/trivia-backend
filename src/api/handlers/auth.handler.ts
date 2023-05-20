@@ -14,7 +14,7 @@ export class AuthHandler implements AuthHandlerInterface {
         this.signUp = this.signUp.bind(this);
         this.renewJsonWebToken = this.renewJsonWebToken.bind(this);
     }
-    async signUp(request: Request, response: Response): Promise<any> {
+    async signUp(request: Request, response: Response): Promise<Response> {
         const { userName, ip } = request.body;
         const userModel: CreateUserModel = {
             userName: userName,
@@ -51,7 +51,7 @@ export class AuthHandler implements AuthHandlerInterface {
             });
         }
     }
-    async renewJsonWebToken(request: Request, response: Response): Promise<any> {
+    async renewJsonWebToken(request: Request, response: Response): Promise<Response> {
         const { userId } = request.body;
 
         try {
