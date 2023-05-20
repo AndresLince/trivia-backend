@@ -47,23 +47,25 @@ describe('Trivia handler create tests', () => {
 
         expect(response.status).toBe(500);
     });
-    it('Should return 400 Bad Request', () => {
-        return request(app).post('/api/trivia').set(
+    it('Should return 400 Bad Request', async() => {
+        const response = await request(app).post('/api/trivia').set(
             { 'x-token': 'mytokennewuser' }
-        ).then((response: Response) => {
-            expect(response.body).toEqual(
-                expect.objectContaining({
-                    errors: expect.any(Object),
-                })
-            ),
-            expect(response.status).toBe(400);
-        });
+        );
+
+        expect(response.body).toEqual(
+            expect.objectContaining({
+                errors: expect.any(Object),
+            })
+        );
+        expect(response.status).toBe(400);
     });
 });
 describe('Trivia handler update answer tests', () => {
     const serviceRoute = '/api/trivia/answer';
-    it('Should return 401 Unauthorized', () => {
-        return request(app).put(serviceRoute).expect(401);
+    it('Should return 401 Unauthorized', async() => {
+        const response = await request(app).put(serviceRoute);
+
+        expect(response.status).toBe(401);
     });
 
     it('Should return 200 Successful', () => {
