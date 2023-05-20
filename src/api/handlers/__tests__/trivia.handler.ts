@@ -125,17 +125,17 @@ describe('Trivia handler get question tests', () => {
         expect(response.status).toBe(401);
     });
 
-    it('Should return 200 Successful', () => {
-        return request(app).get(serviceRoute + validIdTrivia).set(
+    it('Should return 200 Successful', async() => {
+        const response = await request(app).get(serviceRoute + validIdTrivia).set(
             { 'x-token': 'mytokennewuser' }
-        ).then((response: Response) => {
-            expect(response.body).toStrictEqual(
-                {
-                    data: questionDataMock
-                }
-            );
-            expect(response.status).toBe(200);
-        });
+        );
+
+        expect(response.body).toStrictEqual(
+            {
+                data: questionDataMock
+            }
+        );
+        expect(response.status).toBe(200);
     });
 
     it('Should return 404 Not Found', () => {
