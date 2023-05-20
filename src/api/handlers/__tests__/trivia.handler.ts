@@ -138,30 +138,30 @@ describe('Trivia handler get question tests', () => {
         expect(response.status).toBe(200);
     });
 
-    it('Should return 404 Not Found', () => {
-        return request(app).get(serviceRoute + invalidIdTrivia).set(
+    it('Should return 404 Not Found', async() => {
+        const response = await request(app).get(serviceRoute + invalidIdTrivia).set(
             { 'x-token': 'mytokenuserwithouttrivia' }
-        ).then((response: Response) => {
-            expect(response.body).toStrictEqual(
-                {
-                    data: {}
-                }
-            );
-            expect(response.status).toBe(404);
-        });
+        );
+
+        expect(response.body).toStrictEqual(
+            {
+                data: {}
+            }
+        );
+        expect(response.status).toBe(404);
     });
 
-    it('Should return 500 Internal Server Error', () => {
-        return request(app).get(serviceRoute + exceptionIdTrivia).set(
+    it('Should return 500 Internal Server Error', async() => {
+        const response = await request(app).get(serviceRoute + exceptionIdTrivia).set(
             { 'x-token': 'mytokennewuser' }
-        ).then((response: Response) => {
-            expect(response.body).toEqual(
-                expect.objectContaining({
+        );
 
-                })
-            ),
-            expect(response.status).toBe(500);
-        });
+        expect(response.body).toEqual(
+            expect.objectContaining({
+
+            })
+        ),
+        expect(response.status).toBe(500);
     });
 });
 
