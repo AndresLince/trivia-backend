@@ -1,4 +1,4 @@
-import { ErrorRequestHandler, RequestHandler } from "express";
+import { RequestHandler } from "express";
 import { ConfigService } from "../../services/config.service";
 
 export interface HttpUtilsHandlerConstructorInterface {
