@@ -8,6 +8,6 @@ export interface HttpUtilsHandlerConstructorInterface {
 export interface HttpUtilsHandlerInterface {
     validateFields: RequestHandler;
     sendBasicJsonResponse(res: Response, status: number, message: string): Response;
-    generateJsonWebToken: Function;
+    generateJsonWebToken(userId: string): void;
     validateJsonWebToken: RequestHandler;
 }
