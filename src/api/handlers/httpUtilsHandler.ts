@@ -2,13 +2,14 @@ import { validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 import { sign, verify } from 'jsonwebtoken';
 import { ConfigService } from '../services/config.service';
+import { HttpUtilsHandlerConstructorInterface } from '../interfaces/handler/http.handler.interface';
 interface JwtPayload {
     userId: string
 }
 
 export class HttpUtilsHandler {
     private configService: ConfigService;
-    constructor({ configService }: any) {
+    constructor({ configService }: HttpUtilsHandlerConstructorInterface) {
         this.configService = configService;
     }
     validateFields(request: Request, response: Response, next: NextFunction) {
@@ -22,7 +23,7 @@ export class HttpUtilsHandler {
         next();
     }
 
-    sendBasicJsonResponse(res: Response, status: number, message: string) {
+    sendBasicJsonResponse(res: Response, status: number, message: string): Response {
         return res.status(status).json({
             message: message,
         });
@@ -43,7 +44,7 @@ export class HttpUtilsHandler {
             });
         });
     };
-    validateJsonWebToken = (req: Request<any>, res: Response, next: NextFunction) => {
+    validateJsonWebToken = (req: Request, res: Response, next: NextFunction) => {
         const token = req.header('x-token');
         if (!token) {
             return res.status(401).json({
