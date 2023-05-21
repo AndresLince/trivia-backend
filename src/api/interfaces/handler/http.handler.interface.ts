@@ -1,4 +1,4 @@
-import { RequestHandler } from "express";
+import { RequestHandler, Response } from "express";
 import { ConfigService } from "../../services/config.service";
 
 export interface HttpUtilsHandlerConstructorInterface {
@@ -7,7 +7,7 @@ export interface HttpUtilsHandlerConstructorInterface {
 
 export interface HttpUtilsHandlerInterface {
     validateFields: RequestHandler;
-    sendBasicJsonResponse: Function;
+    sendBasicJsonResponse(res: Response, status: number, message: string): Response;
     generateJsonWebToken: Function;
     validateJsonWebToken: RequestHandler;
 }
