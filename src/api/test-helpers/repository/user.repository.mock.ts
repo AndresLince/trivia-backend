@@ -7,7 +7,7 @@ const searchUserByName = jest.fn(({ userName, ip }: CreateUserModel) => {
         userName: userName,
         ip: ip,
         state: 1,
-        idUser: 1
+        idUser: '1'
     };
     if (userName === 'userNameDifferentIp') {
         user.ip = '192.168.0.1';
