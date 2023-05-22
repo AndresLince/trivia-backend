@@ -37,7 +37,7 @@ export class DatabaseMysqlHandler implements DatabaseHandlerInterface {
         this.pool.query = util.promisify(this.pool.query);
     }
 
-    getPool(): Pool {
+    getPool(): any {
         return this.pool;
     }
 }
