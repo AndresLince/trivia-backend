@@ -20,8 +20,9 @@ export class TriviaHandler implements TriviaHandlerInterface {
         this.setSelectedAnswer = this.setSelectedAnswer.bind(this);
         this.getSummary = this.getSummary.bind(this);
     }
-    async create(request: Request, response: Response): Promise<any> {
-        let { userId, idQuestionCategory } = request.body;
+    async create(request: Request, response: Response): Promise<Response> {
+        let { idQuestionCategory } = request.body;
+        const { userId } = request.body;
         idQuestionCategory = this.cryptoHandler.decrypt(idQuestionCategory);
 
         const triviaModel: CreateTrivia = {
@@ -54,7 +55,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
             return this.httpUtilsHandler.sendBasicJsonResponse(response, 500, "Error interno por favor intenta nuevamente");
         }
     }
-    async getQuestion(request: Request, response: Response): Promise<any> {
+    async getQuestion(request: Request, response: Response): Promise<Response> {
         let { idTrivia } = request.params;
         idTrivia = this.cryptoHandler.decrypt(idTrivia);
 
@@ -76,7 +77,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
             return this.httpUtilsHandler.sendBasicJsonResponse(response, 500, "Error interno por favor intenta nuevamente");
         }
     }
-    async setSelectedAnswer(request: Request, response: Response): Promise<any> {
+    async setSelectedAnswer(request: Request, response: Response): Promise<Response> {
         const { idTrivia, idQuestion, idSelectedAnswer } = request.body;
 
         const selectedAnswerModel: SetSelectedAnswer = {
@@ -102,7 +103,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
         }
     }
 
-    async getSummary(request: Request, response: Response): Promise<any> {
+    async getSummary(request: Request, response: Response): Promise<Response> {
         let { idTrivia } = request.params;
         const { userId } = request.body;
 
@@ -127,7 +128,7 @@ export class TriviaHandler implements TriviaHandlerInterface {
             }
 
             if (trivia && trivia.idTrivia == idTrivia) {
-                const insertId = await this.triviaRepository.createUserScore(userId, score);
+                await this.triviaRepository.createUserScore(userId, score);
             }
 
             const userScore = await this.triviaRepository.getUserScore();
